@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Toggle Native Tab Bar",
+  "version": "1.0",
+  "description": "Shows or hides the native tab bar",
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon-visible.png",
+    "default_title": "Toggle Native Tab Bar"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icon-hidden.png",
+    "48": "icon-hidden.png",
+    "128": "icon-hidden.png"
+  }
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Using Toggle Native Tab Bar</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>How to use Toggle Native Tab Bar</h1>
+    <p>Here are some instructions on how to use this extension...</p>
+    <h2>(REQUIRED) Enabling userChrome.css (Skip this section if you already use userChrome.css)</h2>
+    <ul>
+        <li>First, go to "about:config" and set "toolkit.legacyUserProfileCustomizations.stylesheets = TRUE" to enable
+            userChrome.css usage</li>
+        <li>Next, go to "about:profiles" and look for the profile that says "This is the profile in use and it cannot be
+            deleted"</li>
+        <li>On the row for "Root Directory", click on "Open Folder" to open the profile folder in your file manager
+        </li>
+        <li>Inside the profile folder, create a new folder called "chrome" if it doesn't exist</li>
+        <li>Inside the "chrome" folder, create a new file called "userChrome.css" if it doesn't exist</li>
+        <ul>
+            <li>Make sure you do not create the file as userChrome.css.txt</li>
+        </ul>
+    </ul>
+    <h2>(REQUIRED) Entering CSS to hide or show the native tab bar into userChrome.css</h2>
+    <ul>
+        <li>Add the following text to your userChrome.css file:</li>
+        <pre>
+        <code>
+    #main-window #titlebar {
+        overflow: hidden;
+        transition: height 0.3s 0.3s !important;
+    }
+
+    /* Hidden state: Hide native tabs strip */
+    #main-window[titlepreface*="XXX"] #titlebar { height: 0 !important; }
+
+    /* Hidden state: Fix z-index of active pinned tabs */
+    #main-window[titlepreface*="XXX"] #tabbrowser-tabs { z-index: 0 !important; }</code>
+        </pre>
+        <li>This addon populate\removes "XXX" to the titlepreface property which is then acted on by your
+            userChrome.css</li>
+        <li>Mozilla reference: <a
+                href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update">https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update</a>
+        </li>
+
+        <li>Save your "userChrome.css" file and restart Firefox</li>
+    </ul>
+    <h2>(INFO) Here are some items to be aware of ...</h2>
+    <ul>
+        <li>The addon icon will change based on if the tabs should be displayed or not</li>
+        <ul style="padding-bottom: 1em;">
+            <li>
+                <img src="icon-visible.png" alt="Visible Icon"
+                    style="vertical-align: middle; width: 5%; padding: 5px 0;">
+                -- This is what
+                the addon icon will look like when the tabs should be displayed
+            </li>
+            <li>
+                <img src="icon-hidden.png" alt="Hidden Icon" style="vertical-align: middle; width: 5%; padding: 5px 0;">
+                -- This is what
+                the addon icon will look like when the tabs should be hidden
+            </li>
+        </ul>
+        <li>When the native tabs are hidden, you do not have direct access to the minimize\maximize\close buttons.
+            Workarounds include:</li>
+        <ul style="padding-bottom: 1em;">
+            <li>Use this addon to show the native tab bar again to get access to the native buttons</li>
+            <li>Use the keyboard shortcuts (Alt+Space, N, X)</li>
+            <li>Use the right-click context menu on the taskbar</li>
+            <li>Use the Windows key + arrow keys to move the window around</li>
+            <li>Download and use Firefox addons the emulate these functions and place on the toolbar</li>
+            <ul>
+                <li>Minimize: <a
+                        href="https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/">https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/</a>
+                </li>
+                <li>Maximize: <a
+                        href="https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/">https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/</a>
+                </li>
+                <li>Close: <a
+                        href="https://addons.mozilla.org/en-US/firefox/addon/close-the-window/">https://addons.mozilla.org/en-US/firefox/addon/close-the-window/</a>
+                </li>
+                <li>
+                    <img src="MinMaxClose.png" alt="Min\Max\Close Emulation"
+                        style="vertical-align: middle; width: 20%; padding: 5px 0;">
+                    -- These addons can virtually replace the native buttons
+                </li>
+            </ul>
+        </ul>
+        <li>When the native tabs are hidden, you do not have direct access to Firefox's menu.</li>
+        <ul style="padding-bottom: 1em;">
+            <li>
+                <img src="menu.png" alt="Firefox Meny" style="vertical-align: middle; width: 35%; padding: 5px 0;">
+                -- This is the native Firefox menu
+            </li>
+            <li>Use this addon to show the native tab bar again, then press "ALT" to get access to Firefox's menu</li>
+        </ul>
+        <li>The idea for this addon was inspired Sidebery's feature: Dynamic native tabs</li>
+        <ul style="padding-bottom: 1em;">
+            <li>Dynamic native tabs: <a
+                    href="https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs">https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs/</a>
+            </li>
+            <li>Sidebery is focused on if Sidebery is displayed or not, this addon just toggles the native bar</li>
+            <li>This allows both the sidebar and native tab bar to be shown if you want</li>
+            <li>This also allows a more generic implementation that could be used with other sidebar addons like Tree
+                Style Tab</li>
+        </ul>
+        <li>Atribution for base addon icon that I modified for this usage</li>
+        <ul style="padding-bottom: 1em;">
+            <li>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik </a> from <a
+                    href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a>
+            </li>
+        </ul>
+    </ul>
+</body>
+
+</html>
