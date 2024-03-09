@@ -1,6 +1,8 @@
 How to use Toggle Native Tab Bar
 ================================
 
+![Demo](https://github.com/irvinm/Toggle-Native-Tab-Bar/blob/main/Demo.gif)
+
 Here are some instructions on how to use this extension...
 
 (REQUIRED) Enabling userChrome.css (Skip this section if you already use userChrome.css)
