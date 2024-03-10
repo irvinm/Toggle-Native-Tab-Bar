@@ -12,23 +12,24 @@ browser.runtime.onInstalled.addListener((details) => {
 });
 
 browser.browserAction.onClicked.addListener((tab) => {
+    hideTabBar = !hideTabBar;
+    localStorage.setItem('hideTabBar', JSON.stringify(hideTabBar));
+    
     browser.windows.getAll().then((windows) => {
-        let titlePreface = hideTabBar ? "" : "XXX ";
+        let titlePreface = hideTabBar ? "XXX" : "";
         windows.forEach((window) => {
             browser.windows.update(window.id, { titlePreface: titlePreface });
         });
-        hideTabBar = !hideTabBar;
-        localStorage.setItem('hideTabBar', JSON.stringify(hideTabBar));
-        updateIcon();
     });
+    updateIcon();
+
 });
 
 // Initialize the addon by setting the titlePreface for all open windows
 browser.windows.getAll().then((windows) => {
-    let titlePreface = hideTabBar ? "XXX " : "";
+    let titlePreface = hideTabBar ? "XXX" : "";
     windows.forEach((window) => {
         browser.windows.update(window.id, { titlePreface: titlePreface });
     });
 });
-
 updateIcon();
