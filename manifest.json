@@ -5,7 +5,8 @@
   "description": "Shows or hides the native tab bar",
   "permissions": [
     "activeTab",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "background": {
     "scripts": [
@@ -16,6 +17,14 @@
     "default_icon": "icon-visible.png",
     "default_title": "Toggle Native Tab Bar"
   },
+  "applications": {
+    "gecko": {
+      "id": "Toggle-Native-Tab_Bar@irvinm.addons.mozilla.org"
+    }
+  },
+  "web_accessible_resources": [
+    "*.png"
+  ],
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
