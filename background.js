@@ -23,4 +23,12 @@ browser.browserAction.onClicked.addListener((tab) => {
     });
 });
 
+// Initialize the addon by setting the titlePreface for all open windows
+browser.windows.getAll().then((windows) => {
+    let titlePreface = hideTabBar ? "XXX " : "";
+    windows.forEach((window) => {
+        browser.windows.update(window.id, { titlePreface: titlePreface });
+    });
+});
+
 updateIcon();
