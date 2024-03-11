@@ -22,11 +22,11 @@ Here are some instructions on how to use this extension...
 
 ```
 #main-window #titlebar { overflow: hidden; transition: height 0.3s 0.3s !important; } /* Hidden state: Hide native tabs strip */
-#main-window[titlepreface*="XXX"] #titlebar { height: 0 !important; } /* Hidden state: Fix z-index of active pinned tabs */ 
-#main-window[titlepreface*="XXX"] #tabbrowser-tabs { z-index: 0 !important; }
+#main-window[titlepreface*=" "] #titlebar { height: 0 !important; } /* Hidden state: Fix z-index of active pinned tabs */ 
+#main-window[titlepreface*=" "] #tabbrowser-tabs { z-index: 0 !important; }
 ```
 
-*   This addon populate\\removes "XXX" to the titlepreface property which is then acted on by your userChrome.css
+*   This addon populate\\removes " " to the titlepreface property which is then acted on by your userChrome.css
 *   Mozilla reference: [https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update)
 *   Save your "userChrome.css" file and restart Firefox
 
