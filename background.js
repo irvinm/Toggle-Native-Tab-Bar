@@ -3,7 +3,7 @@ let hideTabBar = JSON.parse(localStorage.getItem('hideTabBar')) || false;
 function setPrefaceAndIcon() {
     // Set Preface for all open windows
     browser.windows.getAll().then((windows) => {
-        let titlePreface = hideTabBar ? "XXX" : "";
+        let titlePreface = hideTabBar ? " " : "";
         windows.forEach((window) => {
             browser.windows.update(window.id, { titlePreface: titlePreface });
         });

@@ -34,12 +34,12 @@
     }
 
     /* Hidden state: Hide native tabs strip */
-    #main-window[titlepreface*="XXX"] #titlebar { height: 0 !important; }
+    #main-window[titlepreface*=" "] #titlebar { height: 0 !important; }
 
     /* Hidden state: Fix z-index of active pinned tabs */
-    #main-window[titlepreface*="XXX"] #tabbrowser-tabs { z-index: 0 !important; }</code>
+    #main-window[titlepreface*=" "] #tabbrowser-tabs { z-index: 0 !important; }</code>
         </pre>
-        <li>This addon populate\removes "XXX" to the titlepreface property which is then acted on by your
+        <li>This addon populate\removes " " to the titlepreface property which is then acted on by your
             userChrome.css</li>
         <li>Mozilla reference: <a
                 href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update">https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update</a>
