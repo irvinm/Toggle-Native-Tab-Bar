@@ -21,8 +21,12 @@ Here are some instructions on how to use this extension...
 *   Add the following text to your userChrome.css file:
 
 ```
-#main-window #titlebar { overflow: hidden; transition: height 0.3s 0.3s !important; } /* Hidden state: Hide native tabs strip */
-#main-window[titlepreface*=" "] #titlebar { height: 0 !important; } /* Hidden state: Fix z-index of active pinned tabs */ 
+#main-window #titlebar { overflow: hidden; transition: height 0.3s 0.3s !important; }
+
+/* Hidden state: Hide native tabs strip */
+#main-window[titlepreface*=" "] #titlebar { height: 0 !important; }
+
+/* Hidden state: Fix z-index of active pinned tabs */ 
 #main-window[titlepreface*=" "] #tabbrowser-tabs { z-index: 0 !important; }
 ```
 
