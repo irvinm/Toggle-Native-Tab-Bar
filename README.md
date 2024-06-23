@@ -1,3 +1,11 @@
+![CI/CD](https://github.com/irvinm/Toggle-Native-Tab-Bar/workflows/CI/CD/badge.svg) ![Mozilla Add-on](https://img.shields.io/amo/users/Toggle-Native-Tab-Bar.svg?style=flat-square) ![](https://img.shields.io/amo/v/Toggle-Native-Tab-Bar.svg?style=flat-square)
+
+<!-- Can also get # of downloads per week:  https://img.shields.io/amo/dw/TST-Lock.svg?style=flat-square -->
+<!-- Github badges:  https://shields.io/search?q=github -->
+<!-- Mozilla badges:  https://shields.io/search?q=mozilla -->
+<!-- https://shields.io/badges -->
+<!-- https://github.com/badges/shields -->
+
 How to use Toggle Native Tab Bar
 ================================
 
