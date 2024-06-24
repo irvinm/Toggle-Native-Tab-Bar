@@ -29,5 +29,10 @@ browser.browserAction.onClicked.addListener((tab) => {
     setPrefaceAndIcon();
 });
 
+// Listen for when a new window is created
+browser.windows.onCreated.addListener((window) => {
+    setPrefaceAndIcon();
+});
+
 // Initialize the addon by setting the titlePreface for all open windows
 setPrefaceAndIcon();
