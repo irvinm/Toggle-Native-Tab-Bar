@@ -18,7 +18,7 @@
     "default_icon": "icon-visible.png",
     "default_title": "Toggle Native Tab Bar"
   },
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "Toggle-Native-Tab_Bar@irvinm.addons.mozilla.org"
     }
@@ -31,8 +31,6 @@
     "open_in_tab": true
   },
   "icons": {
-    "16": "icon-hidden.png",
-    "48": "icon-hidden.png",
     "128": "icon-hidden.png"
   }
 }
