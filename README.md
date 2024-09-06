@@ -23,7 +23,7 @@ How to use Toggle Native Tab Bar
 
 These steps will enable custom styling with the `userChrome.css` file.
 
-(REQUIRED) Enter CSS to Hide or Show the Native Tab Bar in `userChrome.css`
+(REQUIRED) Enter CSS to hide or show the native tab bar in `userChrome.css`
 ---------------------------------------------
 
 1. Open the `userChrome.css` file you created earlier in the `chrome` folder.
