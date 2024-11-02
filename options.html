@@ -4,31 +4,65 @@
 <head>
     <title>Using Toggle Native Tab Bar</title>
     <link rel="stylesheet" type="text/css" href="options.css">
+    <link rel="stylesheet" type="text/css" href="prism.css"> <!-- Reference dark Prism CSS -->
 </head>
 
 <body>
-    <h1>How to use Toggle Native Tab Bar</h1>
-    <p>Here are some instructions on how to use this extension...</p>
+    <h1>Toggle Native Tab Bar Information</h1>
+    <p id="firefox-version">Loading Firefox version...</p> <!-- Placeholder for Firefox version -->
+
+    <!-- High Importance News Section -->
+    <div id="update-notice" style="border: 2px solid red; padding: 0 10px 10px 10px; background-color: black; margin-bottom: 20px;">
+        <h2 style="color: red;">IMPORTANT UPDATE REQUIRED FOR FIREFOX 133+</h2>
+        <p>If this is your first time using this addon, skip this box and just follow the instructions below.</p>
+        <p>If you are an existing user, you will need to update your <code>userChrome.css</code> file before using Firefox 133+. Without this change, this addon will stop working. The new CSS can be applied to earlier versions as well.</p>
+        <p>Please remove all old CSS related to this addon and replace it with the following:</p>
+        <pre>
+            <code class="language-css">
+    #main-window[titlepreface*=" "] #TabsToolbar {
+        display: none;
+    }       </code>
+        </pre>
+        <p>While I have tested as much as I can between Firefox 131, 132, and 133, if there are any issues or suggestions related to <code>userChrome.css</code>, please provide feedback in the following discussion: <a href="https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3">https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3</a></p>
+        <label>
+            <input type="checkbox" id="acknowledge-FF133-checkbox">
+            I acknowledge the changes I need to make to userChrome.css and don't wish to see this options box after an upgrade until I need to change something else.
+        </label>
+    </div>
+
+    <h1>Instructions on how to setup and use this addon</h1>
     <h2>(REQUIRED) Enabling userChrome.css (Skip this section if you already use userChrome.css)</h2>
     <ul>
-        <li>First, go to "about:config" and set "toolkit.legacyUserProfileCustomizations.stylesheets = TRUE" to enable
-            userChrome.css usage</li>
-        <li>Next, go to "about:profiles" and look for the profile that says "This is the profile in use and it cannot be
-            deleted"</li>
-        <li>On the row for "Root Directory", click on "Open Folder" to open the profile folder in your file manager
-        </li>
-        <li>Inside the profile folder, create a new folder called "chrome" if it doesn't exist</li>
-        <li>Inside the "chrome" folder, create a new file called "userChrome.css" if it doesn't exist</li>
+        <li>First, go to <code>about:config</code> and set <code>toolkit.legacyUserProfileCustomizations.stylesheets = TRUE</code> to enable userChrome.css usage</li>
+        <li>Next, go to <code>about:profiles</code> and look for the profile that says <code>This is the profile in use and it cannot be deleted</code></li>
+        <li>On the row for <code>Root Directory</code>, click on <code>Open Folder</code> to open the profile folder in your file manager</li>
+        <li>Inside the profile folder, create a new folder called <code>chrome</code> if it doesn't exist</li>
+        <li>Inside the <code>chrome</code> folder, create a new file called <code>userChrome.css</code> if it doesn't exist</li>
         <ul>
-            <li>Make sure you do not create the file as userChrome.css.txt</li>
-        </ul>
+            <h3>PC Specific File Handling</h3>
+            <li>Ensure your filename is <code>userChrome.css</code> not <code>userChrome.css.txt</code> if you are hiding file extensions</li>
+            <h3>Mac Specific File Handling</h3>
+            <li>If you are using TextEdit on Mac to create or edit your <code>userChrome.css</code> file, follow these steps to avoid saving it with an incorrect extension:</li>
+            <ul>
+                <li>Open TextEdit and go to <strong>Format</strong> > <strong>Make Plain Text</strong>.</li>
+                <li>When saving the file, ensure that the file extension is <code>.css</code> and not <code>.rtf</code> or <code>.txt</code>.</li>
+                <li>If prompted, confirm that you want to use the <code>.css</code> extension.</li>
+                <li>Mac review feedback - <a href="https://addons.mozilla.org/en-US/firefox/addon/toggle-native-tab-bar/reviews/2114522">https://addons.mozilla.org/en-US/firefox/addon/toggle-native-tab-bar/reviews/2114522</a></li>
+            </ul>            
+    </ul>
     </ul>
     <h2>(REQUIRED) Entering CSS to hide or show the native tab bar into userChrome.css</h2>
     <ul>
-        <li>Add the following text to your userChrome.css file:</li>
+        <h3>New simplified CSS required for Firefox 133+ (although will work with current versions)</h3>
         <pre>
-        <code>
-    #main-window #titlebar {
+            <code class="language-css">
+    #main-window[titlepreface*=" "] #TabsToolbar {
+        display: none;
+    }       </code>
+        </pre>
+        <h3>Original CSS that will work through Firefox 132</h3>
+        <pre>            
+<code class="language-css">    #main-window #titlebar {
         overflow: hidden;
         transition: height 0.3s 0.3s !important;
     }
@@ -37,82 +71,70 @@
     #main-window[titlepreface*=" "] #titlebar { height: 0 !important; }
 
     /* Hidden state: Fix z-index of active pinned tabs */
-    #main-window[titlepreface*=" "] #tabbrowser-tabs { z-index: 0 !important; }</code>
+    #main-window[titlepreface*=" "] #tabbrowser-tabs { z-index: 0 !important; } </code>
         </pre>
-        <li>This addon populate\removes " " to the titlepreface property which is then acted on by your
-            userChrome.css</li>
-        <li>Mozilla reference: <a
-                href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update">https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update</a>
-        </li>
-
-        <li>Save your "userChrome.css" file and restart Firefox</li>
+        <li>This addon populates/removes " " to the titlepreface property which is then acted on by your userChrome.css</li>
+        <li>Mozilla reference: <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update">https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update</a></li>
+        <li>Save your <code>userChrome.css</code> file and <code>restart Firefox</code></li>
     </ul>
     <h2>(INFO) Here are some items to be aware of ...</h2>
     <ul>
+        <h3>Addon Icon</h3>
         <li>The addon icon will change based on if the tabs should be displayed or not</li>
         <ul style="padding-bottom: 1em;">
             <li>
-                <img src="icon-visible.png" alt="Visible Icon"
-                    style="vertical-align: middle; width: 5%; padding: 5px 0;">
-                -- This is what
-                the addon icon will look like when the tabs should be displayed
+                <img src="icon-visible.png" alt="Visible Icon" style="vertical-align: middle; width: 5%; padding: 5px 0;">
+                -- This is what the addon icon will look like when the tabs should be displayed
             </li>
             <li>
                 <img src="icon-hidden.png" alt="Hidden Icon" style="vertical-align: middle; width: 5%; padding: 5px 0;">
-                -- This is what
-                the addon icon will look like when the tabs should be hidden
+                -- This is what the addon icon will look like when the tabs should be hidden
             </li>
         </ul>
-        <li>When the native tabs are hidden, you do not have direct access to the minimize\maximize\close buttons.
-            Workarounds include:</li>
+        <h3>Minimize/Maximize/Close Buttons</h3>
+        <li>When the native tabs are hidden, you do not have direct access to the minimize/maximize/close buttons. Workarounds include:</li>
         <ul style="padding-bottom: 1em;">
             <li>Use this addon to show the native tab bar again to get access to the native buttons</li>
             <li>Use the keyboard shortcuts (Alt+Space, N, X)</li>
             <li>Use the right-click context menu on the taskbar</li>
             <li>Use the Windows key + arrow keys to move the window around</li>
-            <li>Download and use Firefox addons the emulate these functions and place on the toolbar</li>
+            <li>Download and use Firefox addons that emulate these functions and place them on the toolbar</li>
             <ul>
-                <li>Minimize: <a
-                        href="https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/">https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/</a>
-                </li>
-                <li>Maximize: <a
-                        href="https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/">https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/</a>
-                </li>
-                <li>Close: <a
-                        href="https://addons.mozilla.org/en-US/firefox/addon/close-the-window/">https://addons.mozilla.org/en-US/firefox/addon/close-the-window/</a>
-                </li>
+                <li>Minimize: <a href="https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/">https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/</a></li>
+                <li>Maximize: <a href="https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/">https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/</a></li>
+                <li>Close: <a href="https://addons.mozilla.org/en-US/firefox/addon/close-the-window/">https://addons.mozilla.org/en-US/firefox/addon/close-the-window/</a></li>
                 <li>
-                    <img src="MinMaxClose.png" alt="Min\Max\Close Emulation"
-                        style="vertical-align: middle; width: 20%; padding: 5px 0;">
+                    <img src="MinMaxClose.png" alt="Min/Max/Close Emulation" style="vertical-align: middle; width: 20%; padding: 5px 0;">
                     -- These addons can virtually replace the native buttons
                 </li>
             </ul>
         </ul>
-        <li>When the native tabs are hidden, you do not have direct access to Firefox's menu.</li>
+        <h3>Native Firefox Menu</h3>
+        <li><s>When the native tabs are hidden, you do not have direct access to Firefox's menu.</s></li>
         <ul style="padding-bottom: 1em;">
             <li>
-                <img src="menu.png" alt="Firefox Meny" style="vertical-align: middle; width: 35%; padding: 5px 0;">
+                <img src="menu.png" alt="Firefox Menu" style="vertical-align: middle; width: 35%; padding: 5px 0;">
                 -- This is the native Firefox menu
             </li>
-            <li>Use this addon to show the native tab bar again, then press "ALT" to get access to Firefox's menu</li>
+            <li><s>Use this addon to show the native tab bar again, then press "ALT" to get access to Firefox's menu</s></li>
+            <li>Pressing "ALT" seems to be working now even without the native tabs showing</li>
         </ul>
-        <li>The idea for this addon was inspired Sidebery's feature: Dynamic native tabs</li>
+        <h3>Inspiration for this addon</h3>
+        <li>The idea for this addon was inspired by Sidebery's feature: Dynamic native tabs</li>
         <ul style="padding-bottom: 1em;">
-            <li>Dynamic native tabs: <a
-                    href="https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs">https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs/</a>
-            </li>
+            <li>Dynamic native tabs: <a href="https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs">https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs/</a></li>
             <li>Sidebery is focused on if Sidebery is displayed or not, this addon just toggles the native bar</li>
             <li>This allows both the sidebar and native tab bar to be shown if you want</li>
-            <li>This also allows a more generic implementation that could be used with other sidebar addons like Tree
-                Style Tab</li>
+            <li>This also allows a more generic implementation that could be used with other sidebar addons like Tree Style Tab</li>
         </ul>
-        <li>Atribution for base addon icon that I modified for this usage</li>
+        <h3>Addon icon attribution</h3>
+        <li>Attribution for base addon icon that I modified for this usage</li>
         <ul style="padding-bottom: 1em;">
-            <li>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik </a> from <a
-                    href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a>
-            </li>
+            <li>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></li>
         </ul>
     </ul>
+    <script src="prism.js"></script> <!-- Reference root Prism JS -->
+    <script src="options.js"></script> <!-- Include the script to get Firefox version -->
 </body>
 
 </html>
