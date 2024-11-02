@@ -7,3 +7,20 @@ body {
 h2 {
     color: red;
 }
+
+h3 {
+    text-decoration: underline;
+}
+
+code {
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 90%;
+    color: #8f0000;
+    background-color: #d7ced1;
+}
+
+#firefox-version {
+    background-color: yellow;
+    color: black;
+}
