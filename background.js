@@ -17,6 +17,22 @@ function setPrefaceAndIcon() {
 browser.runtime.onInstalled.addListener((details) => {
     if (details.reason === 'install') {
         browser.tabs.create({ url: 'options.html' });
+    } else if (details.reason === 'update') {
+        const acknowledgedFF133 = localStorage.getItem('acknowledgeFF133Changes');
+        if (!acknowledgedFF133) {
+            // Open the options.html page when the addon is updated
+            browser.tabs.create({ url: browser.runtime.getURL('options.html') });
+        }
+
+        // Log the previous and new versions
+        const previousVersion = details.previousVersion;
+        const newVersion = browser.runtime.getManifest().version;
+        console.log(`Addon updated from version ${previousVersion} to ${newVersion}`);
+
+        // Get and log the Firefox version
+        browser.runtime.getBrowserInfo().then((info) => {
+            console.log(`Firefox version: ${info.version}`);
+        });
     }
 });
 
