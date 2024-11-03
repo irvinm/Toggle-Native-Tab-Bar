@@ -65,9 +65,9 @@
         <ul>
             <h3>New simplified CSS required for Firefox 133+ (although will work with current versions)</h3>
             <div id="css-box">
-        <span class="token selector">#main-window[titlepreface*=" "] #TabsToolbar</span> <span class="token punctuation">{</span>
-            <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>   
+    <span class="token selector">#main-window[titlepreface*=" "] #TabsToolbar</span> <span class="token punctuation">{</span>
+        <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>   
             </div>  
 <!--
             <pre>
@@ -80,16 +80,16 @@
 
             <h3>Original CSS that will work through Firefox 132</h3>
             <div id="css-box">
-        <span class="token selector">#main-window #titlebar</span> <span class="token punctuation">{</span>
-            <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
-            <span class="token property">transition</span><span class="token punctuation">:</span> height 0.3s 0.3s <span class="token important">!important</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
+    <span class="token selector">#main-window #titlebar</span> <span class="token punctuation">{</span>
+        <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+        <span class="token property">transition</span><span class="token punctuation">:</span> height 0.3s 0.3s <span class="token important">!important</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-        <span class="token comment">/* Hidden state: Hide native tabs strip */</span>
-        <span class="token selector">#main-window[titlepreface*=" "] #titlebar</span> <span class="token punctuation">{</span> <span class="token property">height</span><span class="token punctuation">:</span> 0 <span class="token important">!important</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token comment">/* Hidden state: Hide native tabs strip */</span>
+    <span class="token selector">#main-window[titlepreface*=" "] #titlebar</span> <span class="token punctuation">{</span> <span class="token property">height</span><span class="token punctuation">:</span> 0 <span class="token important">!important</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
 
-        <span class="token comment">/* Hidden state: Fix z-index of active pinned tabs */</span>
-        <span class="token selector">#main-window[titlepreface*=" "] #tabbrowser-tabs</span> <span class="token punctuation">{</span> <span class="token property">z-index</span><span class="token punctuation">:</span> 0 <span class="token important">!important</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> 
+    <span class="token comment">/* Hidden state: Fix z-index of active pinned tabs */</span>
+    <span class="token selector">#main-window[titlepreface*=" "] #tabbrowser-tabs</span> <span class="token punctuation">{</span> <span class="token property">z-index</span><span class="token punctuation">:</span> 0 <span class="token important">!important</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> 
             </div>
     <!--
             <pre>            
