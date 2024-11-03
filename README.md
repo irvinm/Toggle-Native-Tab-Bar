@@ -30,26 +30,15 @@ These steps will enable custom styling with the `userChrome.css` file.
 2. Add the following CSS to the file:
 
    ```css
-   #main-window #titlebar {
-       overflow: hidden;
-       transition: height 0.3s 0.3s !important;
-   }
-
-   /* Hidden state: Hide native tabs strip */
-   #main-window[titlepreface*=" "] #titlebar {
-       height: 0 !important;
-   }
-
-   /* Hidden state: Fix z-index of active pinned tabs */
-   #main-window[titlepreface*=" "] #tabbrowser-tabs {
-       z-index: 0 !important;
-   }
+     #main-window[titlepreface*=" "] #TabsToolbar {
+         display: none;
+     }
    ```
 
 3. Save your userChrome.css file and restart Firefox to apply the changes.
 
 **Explanation**
-- This CSS targets the titlebar and adjusts its height to hide the native tab bar when a certain condition is met.
+- This CSS targets TabsToolbar and hides the native tab bar when a certain condition is met.
 - The condition is based on the titlepreface property, which this add-on manipulates by adding or removing a space (" ").
 
 **Reference**
@@ -71,11 +60,12 @@ These steps will enable custom styling with the `userChrome.css` file.
         *   [Close the Window](https://addons.mozilla.org/en-US/firefox/addon/close-the-window/)
         *   <img src="MinMaxClose.png" alt="Min\Max\Close Emulation" width="30%" /> -- These addons can replace the native buttons.
 
-(LIMITATION) Limited access to Firefox's menu when native tabs are hidden
+~~(LIMITATION) Limited access to Firefox's menu when native tabs are hidden~~
 ---------------------------------------------
 
 *   <img src="menu.png" alt="Firefox Menu" width="50%" /> -- This is the native Firefox menu.
-*   Use this addon to temporarily show the native tab bar, then press the `ALT` key to access Firefox's menu.
+*   ~~Use this addon to temporarily show the native tab bar, then press the `ALT` key to access Firefox's menu.~~
+*   Pressing "ALT" seems to be working now even without the native tabs showing
 
 
 (INFO) Addon icon
