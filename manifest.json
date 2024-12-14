@@ -34,5 +34,13 @@
   },
   "icons": {
     "128": "icon-hidden.png"
+  },
+  "commands": {
+    "toggle-tab-bar": {
+      "suggested_key": {
+        "default": "Ctrl+Alt+T"
+      },
+      "description": "Toggle the native tab bar"
+    }
   }
 }

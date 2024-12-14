@@ -45,6 +45,15 @@ browser.browserAction.onClicked.addListener((tab) => {
     setPrefaceAndIcon();
 });
 
+// Add a listener for the command
+browser.commands.onCommand.addListener((command) => {
+    if (command === "toggle-tab-bar") {
+        hideTabBar = !hideTabBar;
+        localStorage.setItem('hideTabBar', JSON.stringify(hideTabBar));
+        setPrefaceAndIcon();
+    }
+});
+
 // Listen for when a new window is created
 browser.windows.onCreated.addListener((window) => {
     setPrefaceAndIcon();
