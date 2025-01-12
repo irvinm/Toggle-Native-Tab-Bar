@@ -44,23 +44,24 @@ browser.runtime.onInstalled.addListener((details) => {
     }
 });
 
+// Add a listener for the browser action -- Triggered via the toolbar icon
 browser.browserAction.onClicked.addListener((tab) => {
-    // Flip the hideTabBar value and save it
-    hideTabBar = !hideTabBar;
-    localStorage.setItem('hideTabBar', JSON.stringify(hideTabBar));
-    
-    // Set the titlePreface for all open windows and the icon
-    setPrefaceAndIcon();
+    toggleTabBar();
 });
 
-// Add a listener for the command
+// Add a listener for the command -- Triggered via keyboard shortcut
 browser.commands.onCommand.addListener((command) => {
     if (command === "toggle-tab-bar") {
-        hideTabBar = !hideTabBar;
-        localStorage.setItem('hideTabBar', JSON.stringify(hideTabBar));
-        setPrefaceAndIcon();
+        toggleTabBar();
     }
 });
+
+// Function to toggle the tab bar
+function toggleTabBar() {
+    hideTabBar = !hideTabBar;
+    localStorage.setItem('hideTabBar', JSON.stringify(hideTabBar));
+    setPrefaceAndIcon();
+}
 
 // Listen for when a new window is created
 browser.windows.onCreated.addListener((window) => {
