@@ -3,8 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the checkbox state based on localStorage
     const acknowledged = localStorage.getItem('acknowledgeFF133Changes');
-    if (acknowledged) {
+    if (acknowledged === 'true') {
         checkbox.checked = true;
+    }
+    else {
+        checkbox.checked = false;
     }
 
     // Add event listener to update localStorage when the checkbox state changes
