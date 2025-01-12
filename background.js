@@ -18,15 +18,23 @@ browser.runtime.onInstalled.addListener((details) => {
     if (details.reason === 'install') {
         browser.tabs.create({ url: 'options.html' });
     } else if (details.reason === 'update') {
-        const acknowledgedFF133 = localStorage.getItem('acknowledgeFF133Changes');
-        if (!acknowledgedFF133) {
+        const previousVersion = details.previousVersion;
+        const newVersion = browser.runtime.getManifest().version;
+
+        // Check if the previous version is 0.9.4 or older
+        if (previousVersion <= '0.9.4') {
+            // Set acknowledgeFF133Changes to false to force the user to acknowledge the changes
+            localStorage.setItem('acknowledgeFF133Changes', 'false');
+        }
+
+        // Check if the acknowledgeFF133Changes flag is set to false
+        const acknowledged = localStorage.getItem('acknowledgeFF133Changes');
+        if (acknowledged === 'false') {
             // Open the options.html page when the addon is updated
             browser.tabs.create({ url: browser.runtime.getURL('options.html') });
         }
 
         // Log the previous and new versions
-        const previousVersion = details.previousVersion;
-        const newVersion = browser.runtime.getManifest().version;
         console.log(`Addon updated from version ${previousVersion} to ${newVersion}`);
 
         // Get and log the Firefox version
