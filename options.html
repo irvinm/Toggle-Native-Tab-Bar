@@ -15,27 +15,43 @@
     <div id="update-notice" style="border: 2px solid red; padding: 0 20px 20px 20px; background-color: black; margin-bottom: 20px;">
         <h2 style="color: red;">IMPORTANT UPDATE REQUIRED FOR FIREFOX 133+</h2>
         <p>If this is your first time using this addon, you can skip this section and follow the instructions below.</p>
-        <p>If you are an existing user, you must update your <code>userChrome.css</code> file before using Firefox 133+. Without this update, the addon will stop working. The new CSS can also be applied to earlier versions of Firefox.</p>
-        <p>Please remove all old CSS related to this addon and replace it with the following:</p>
-        <div id="css-box">
+        <p>If you are an existing user, you must update your <code>userChrome.css</code> file before using Firefox 133+. Without this update, the addon will stop working. The new CSS can also be applied to earlier versions of Firefox. Please remove all old CSS related to this addon and replace it with one of the following:</p>
+
+        <h3>(Option #1 - Original) Hide the native tab bar and use addons for min/max/close</h3>
+            <div id="css-box">
     <span class="token selector">#main-window[titlepreface*=" "] #TabsToolbar</span> <span class="token punctuation">{</span>
-        <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>   
-        </div>  
-<!--              
-        <pre>
-            <code class="language-css">
-    #main-window[titlepreface*=" "] #TabsToolbar {
-        display: none;
-    }       </code>
-        </pre>
--->
-        <p>While I have tested as much as I can between Firefox 131, 132, and 133, if there are any issues or suggestions related to <code>userChrome.css</code>, please provide feedback in the following discussion: <a href="https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3">https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3</a></p>
+        <span class="token property">display</span><span class="token punctuation">:</span> <span class="token keyword">none</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+            </div>
+
+        <h3>(Option #2 - New Alternative) Hide the native tab bar and use Firefox native min/max/close buttons</h3>
+            <div id="css-box">
+    <span class="token selector">#main-window[titlepreface*=" "]</span> <span class="token punctuation">{</span>
+        <span class="token selector">#TabsToolbar</span> <span class="token punctuation">{</span>
+            <span class="token property">display</span><span class="token punctuation">:</span> <span class="token keyword">none</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token selector">#nav-bar</span> <span class="token punctuation">{</span>
+            <span class="token selector">.titlebar-buttonbox-container</span> <span class="token punctuation">{</span>
+                <span class="token property">display</span><span class="token punctuation">:</span> <span class="token keyword">flex</span> <span class="token important">!important</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+            </div>
+
+        <p>If there are any issues or suggestions related to <code>userChrome.css</code>, please provide feedback in the following discussion: <a href="https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3">https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3</a></p>
         <label>
             <input type="checkbox" id="acknowledge-FF133-checkbox">
             I acknowledge the changes I need to make to userChrome.css and don't wish to see this options box after an upgrade until I need to change something else.
         </label>
     </div>
+
+    <h1>What's new?</h1>
+    <ul>
+        <p>A new (optional) CSS solution is available now that allows you to use the native Firefox min/max/close buttons instead of having to use addon replacements.</p>
+        <p>For the history on this, please refer to this discussion: <a href="https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3#issuecomment-2556331029">https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3#issuecomment-2556331029</a></p>
+        <p><img src="native-buttons.png" alt="Native Buttons" style="vertical-align: middle; padding: 5px 0; width: auto; height: auto;"></p>
+    </ul>
 
     <h1>Instructions on how to setup and use this addon</h1>
     <ul style="padding-bottom: 1em;">
@@ -46,29 +62,31 @@
             <li>On the row for <code>Root Directory</code>, click on <code>Open Folder</code> to open the profile folder in your file manager</li>
             <li>Inside the profile folder, create a new folder called <code>chrome</code> if it doesn't exist</li>
             <li>Inside the <code>chrome</code> folder, create a new file called <code>userChrome.css</code> if it doesn't exist</li>
+        </ul>
+        <h3>PC Specific File Handling</h3>
+        <ul>
+            <li>Ensure your filename is <code>userChrome.css</code> not <code>userChrome.css.txt</code> if you are hiding file extensions</li>
+        </ul>
+        <h3>Mac Specific File Handling</h3>
+        <ul>
+            <li>If you are using TextEdit on Mac to create or edit your <code>userChrome.css</code> file, follow these steps to avoid saving it with an incorrect extension:</li>
             <ul>
-                <h3>PC Specific File Handling</h3>
-                <li>Ensure your filename is <code>userChrome.css</code> not <code>userChrome.css.txt</code> if you are hiding file extensions</li>
-                <h3>Mac Specific File Handling</h3>
-                <li>If you are using TextEdit on Mac to create or edit your <code>userChrome.css</code> file, follow these steps to avoid saving it with an incorrect extension:</li>
-                <ul>
-                    <li>Open TextEdit and go to <strong>Format</strong> > <strong>Make Plain Text</strong>.</li>
-                    <li>When saving the file, ensure that the file extension is <code>.css</code> and not <code>.rtf</code> or <code>.txt</code>.</li>
-                    <li>If prompted, confirm that you want to use the <code>.css</code> extension.</li>
-                    <li>Mac review feedback - <a href="https://addons.mozilla.org/en-US/firefox/addon/toggle-native-tab-bar/reviews/2114522">https://addons.mozilla.org/en-US/firefox/addon/toggle-native-tab-bar/reviews/2114522</a></li>
-                </ul>            
+                <li>Open TextEdit and go to <strong>Format</strong> > <strong>Make Plain Text</strong>.</li>
+                <li>When saving the file, ensure that the file extension is <code>.css</code> and not <code>.rtf</code> or <code>.txt</code>.</li>
+                <li>If prompted, confirm that you want to use the <code>.css</code> extension.</li>
+                <li>Mac review feedback - <a href="https://addons.mozilla.org/en-US/firefox/addon/toggle-native-tab-bar/reviews/2114522">https://addons.mozilla.org/en-US/firefox/addon/toggle-native-tab-bar/reviews/2114522</a></li>
             </ul>
         </ul>
     </ul>
     <ul style="padding-bottom: 1em;">
         <h2>(REQUIRED) Entering CSS to hide or show the native tab bar into userChrome.css</h2>
         <ul>
-            <h3>New simplified CSS required for Firefox 133+ (although will work with current versions)</h3>
+            <h3>FF133+: Original solution which requires separate min/max/close buttons if desired</h3>
             <div id="css-box">
     <span class="token selector">#main-window[titlepreface*=" "] #TabsToolbar</span> <span class="token punctuation">{</span>
-        <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>   
-            </div>  
+        <span class="token property">display</span><span class="token punctuation">:</span> <span class="token keyword">none</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+            </div> 
 <!--
             <pre>
                 <code class="language-css">
@@ -77,19 +95,33 @@
         }       </code>
             </pre>
 -->
+            <h3>FF133+: Alternative solution to utilize Firefox native min/max/close buttons</h3>
+            <div id="css-box">
+    <span class="token selector">#main-window[titlepreface*=" "]</span> <span class="token punctuation">{</span>
+        <span class="token selector">#TabsToolbar</span> <span class="token punctuation">{</span>
+            <span class="token property">display</span><span class="token punctuation">:</span> <span class="token keyword">none</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-            <h3>Original CSS that will work through Firefox 132</h3>
+        <span class="token selector">#nav-bar</span> <span class="token punctuation">{</span>
+            <span class="token selector">.titlebar-buttonbox-container</span> <span class="token punctuation">{</span>
+                <span class="token property">display</span><span class="token punctuation">:</span> <span class="token keyword">flex</span> <span class="token important">!important</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+            </div>
+
+            <h3>Up to FF132: Initial solution</h3>
             <div id="css-box">
     <span class="token selector">#main-window #titlebar</span> <span class="token punctuation">{</span>
-        <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
-        <span class="token property">transition</span><span class="token punctuation">:</span> height 0.3s 0.3s <span class="token important">!important</span><span class="token punctuation">;</span>
+        <span class="token property">overflow</span><span class="token punctuation">:</span><span class="token keyword"> hidden</span><span class="token punctuation">;</span>
+        <span class="token property">transition</span><span class="token punctuation">:</span><span class="token keyword"> height 0.3s 0.3s</span> <span class="token important">!important</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
     <span class="token comment">/* Hidden state: Hide native tabs strip */</span>
-    <span class="token selector">#main-window[titlepreface*=" "] #titlebar</span> <span class="token punctuation">{</span> <span class="token property">height</span><span class="token punctuation">:</span> 0 <span class="token important">!important</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token selector">#main-window[titlepreface*=" "] #titlebar</span> <span class="token punctuation">{</span> <span class="token property">height</span><span class="token punctuation">:</span><span class="token keyword"> 0</span> <span class="token important">!important</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
 
     <span class="token comment">/* Hidden state: Fix z-index of active pinned tabs */</span>
-    <span class="token selector">#main-window[titlepreface*=" "] #tabbrowser-tabs</span> <span class="token punctuation">{</span> <span class="token property">z-index</span><span class="token punctuation">:</span> 0 <span class="token important">!important</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> 
+    <span class="token selector">#main-window[titlepreface*=" "] #tabbrowser-tabs</span> <span class="token punctuation">{</span> <span class="token property">z-index</span><span class="token punctuation">:</span><span class="token keyword"> 0</span> <span class="token important">!important</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> 
             </div>
     <!--
             <pre>            
@@ -129,8 +161,10 @@
             </ul>
             <h3>Minimize/Maximize/Close Buttons</h3>
             <ul style="padding-left: 1em;">
-                <li>When the native tabs are hidden, you do not have direct access to the minimize/maximize/close buttons. Workarounds include:</li>
+                <li>If you use the simplified solution, when the native tabs are hidden, you do not have direct access to the minimize/maximize/close buttons. </li>
+                <li>Workarounds include:</li>
                 <ul style="padding-bottom: 1em;">
+                    <li>Use the new CSS solution to show the Firefox native buttons</li>
                     <li>Use this addon to show the native tab bar again to get access to the native buttons</li>
                     <li>Use the keyboard shortcuts (Alt+Space, N, X)</li>
                     <li>Use the right-click context menu on the taskbar</li>
@@ -145,17 +179,6 @@
                             -- These addons can virtually replace the native buttons
                         </li>
                     </ul>
-                </ul>
-            <h3>Native Firefox Menu</h3>
-            <ul style="padding-left: 1em;">
-                <li><s>When the native tabs are hidden, you do not have direct access to Firefox's menu.</s></li>
-                <ul style="padding-bottom: 1em;">
-                    <li>
-                        <img src="menu.png" alt="Firefox Menu" style="vertical-align: middle; width: 35%; padding: 5px 0;">
-                        -- This is the native Firefox menu
-                    </li>
-                    <li><s>Use this addon to show the native tab bar again, then press "ALT" to get access to Firefox's menu</s></li>
-                    <li>Pressing "ALT" seems to be working now even without the native tabs showing</li>
                 </ul>
             </ul>
             <h3>Inspiration for this addon</h3>
