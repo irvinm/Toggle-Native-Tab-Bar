@@ -27,14 +27,32 @@ These steps will enable custom styling with the `userChrome.css` file.
 ---------------------------------------------
 
 1. Open the `userChrome.css` file you created earlier in the `chrome` folder.
-2. Add the following CSS to the file:
+2. Add the one of these CSS solutions to the file:
+    - Option #1 - Original:  Hide the native tab bar and use addons for min/max/close
 
    ```css
      #main-window[titlepreface*=" "] #TabsToolbar {
          display: none;
      }
    ```
+     - Option #2 - New Alternative:  Hide the native tab bar and use Firefox native min/max/close buttons
 
+   ```css
+    #main-window[titlepreface*=" "] {
+        #TabsToolbar {
+            display: none;
+        }
+
+        #nav-bar {
+            .titlebar-buttonbox-container {
+                display: flex !important;
+            }
+        }
+    }
+   ```
+    <div style="display: flex; align-items: center; margin-bottom: 10px; margin-top: 5px;">
+        <img src="native-buttons.png" alt="Using native buttons" style="margin-right: 10px;" />
+    </div>
 3. Save your userChrome.css file and restart Firefox to apply the changes.
 
 **Explanation**
@@ -60,12 +78,6 @@ These steps will enable custom styling with the `userChrome.css` file.
         *   [Close the Window](https://addons.mozilla.org/en-US/firefox/addon/close-the-window/)
         *   <img src="MinMaxClose.png" alt="Min\Max\Close Emulation" width="30%" /> -- These addons can replace the native buttons.
 
-~~(LIMITATION) Limited access to Firefox's menu when native tabs are hidden~~
----------------------------------------------
-
-*   <img src="menu.png" alt="Firefox Menu" width="50%" /> -- This is the native Firefox menu.
-*   ~~Use this addon to temporarily show the native tab bar, then press the `ALT` key to access Firefox's menu.~~
-*   Pressing "ALT" seems to be working now even without the native tabs showing
 
 
 (INFO) Addon icon
