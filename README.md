@@ -66,6 +66,7 @@ These steps will enable custom styling with the `userChrome.css` file.
 ---------------------------------------------
 
 *   When the native tabs are hidden, the minimize, maximize, and close buttons are not directly accessible. Here are some workarounds:
+    *   Use the new CSS solution to keep the Firefox native min/max/close buttons.
     *   Use this addon to temporarily show the native tab bar and regain access to the native window control buttons.
     *   Use keyboard shortcuts:
         *   `Alt+Space, N` for minimize
