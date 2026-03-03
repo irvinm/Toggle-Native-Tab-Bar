@@ -9,9 +9,9 @@ function setPrefaceAndIcon() {
         });
     });
 
-    // Set the icon
-    let path = hideTabBar ? 'icon-hidden.png' : 'icon-visible.png';
-    browser.browserAction.setIcon({ path: path });
+    // Set the native SVG icon
+    let iconPath = hideTabBar ? 'icon-hidden.svg' : 'icon-visible.svg';
+    browser.browserAction.setIcon({ path: iconPath });
 }
 
 browser.runtime.onInstalled.addListener((details) => {
