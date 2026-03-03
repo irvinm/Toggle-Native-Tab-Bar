@@ -4,11 +4,7 @@
   "version": "0.9.5",
   "description": "Shows or hides the native tab bar",
   "homepage_url": "https://github.com/irvinm/Toggle-Native-Tab-Bar",
-  "permissions": [
-    "activeTab",
-    "tabs",
-    "storage"
-  ],
+  "permissions": [],
   "background": {
     "scripts": [
       "background.js"
