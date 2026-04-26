@@ -79,6 +79,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // Listen for storage changes from the background script or other pages
+    browser.storage.onChanged.addListener((changes, area) => {
+        if (area === 'local' && (changes.lastAcknowledgedVersion || changes.hideTabBar)) {
+            updateBannerVisibility();
+            if (checkbox && changes.lastAcknowledgedVersion) {
+                checkbox.checked = (changes.lastAcknowledgedVersion.newValue === currentVersion);
+            }
+        }
+    });
+
     // Get the Firefox version and display it
     browser.runtime.getBrowserInfo().then((info) => {
         const versionElement = document.getElementById('firefox-version');
