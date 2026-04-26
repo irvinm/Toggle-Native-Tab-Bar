@@ -16,7 +16,7 @@ Toggle Native Tab Bar gives you complete control over your browser's real estate
 Functionality examples
 -----------------------------------------------
 
-Firefox now offers two types of sidebars that can be used in combination with this addon:
+Firefox now offers two types of sidebars that can be used in combination with this add-on:
 *   **Traditional Sidebar:** The standard sidebar used by extensions like **Tree Style Tab** or **Sidebery**.
 *   **New Sidebar (Select):** The modern Firefox sidebar that allows switching between different sidebar views. 
     *   *Note: In **Vertical Tabs** mode, these selections are integrated directly into the vertical tab bar.*
@@ -34,7 +34,7 @@ https://github.com/user-attachments/assets/a9bd1419-f971-4bf3-8e38-17ef06ae9046
 https://github.com/user-attachments/assets/46f8fd9c-0919-44bf-a161-1b8b314e2b38
 
 > [!NOTE]
-> These examples show the addon toggling the native tab bar while correctly preserving the state of both the traditional and new sidebar elements.
+> These examples show the add-on toggling the native tab bar while correctly preserving the state of both the traditional and new sidebar elements.
 
 How to use configure Toggle Native Tab Bar
 -----------------------------------------------
@@ -146,13 +146,13 @@ These steps will enable custom styling with the `userChrome.css` file.
 
 *   When the native tabs are hidden, the minimize, maximize, and close buttons are not directly accessible. Here are some workarounds:
     *   Use the current CSS solution to keep the Firefox native min/max/close buttons. (RECOMMENDED)
-    *   Use this addon to temporarily show the native tab bar and regain access to the native window control buttons.
+    *   Use this add-on to temporarily show the native tab bar and regain access to the native window control buttons.
     *   Use keyboard shortcuts:
         *   `Alt+Space, N` for minimize
         *   `Alt+Space, X` for maximize
     *   Right-click the taskbar and use the context menu options.
     *   Use `Windows Key + Arrow Keys` to move and resize the window.
-    *   Download and use Firefox addons that emulate the window control buttons and place them on the toolbar:
+    *   Download and use Firefox add-ons that emulate the window control buttons and place them on the toolbar:
         *   [Minimize the Window](https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/)
         *   [Maximize the Window](https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/)
         *   [Close the Window](https://addons.mozilla.org/en-US/firefox/addon/close-the-window/)
@@ -163,13 +163,13 @@ These steps will enable custom styling with the `userChrome.css` file.
 (INFO) Addon icon & Dynamic Coloring
 ---------------------------------------------
 
-*   **Modern Minimalist Design:** The addon icon has been updated to a modern SVG design that visually represents both horizontal and vertical tab states.
-*   **Dynamic Icon Color:** The addon now uses native SVG icons with `context-fill`. To allow the icon to automatically match your Firefox theme colors (staying visible on light, dark, or colorful themes), you must enable dynamic theme support:
+*   **Modern Minimalist Design:** The add-on icon has been updated to a modern SVG design that visually represents both horizontal and vertical tab states.
+*   **Dynamic Icon Color:** The add-on now uses native SVG icons with `context-fill`. To allow the icon to automatically match your Firefox theme colors (staying visible on light, dark, or colorful themes), you must enable dynamic theme support:
     1. Go to `about:config`.
     2. Set `svg.context-properties.content.enabled` to **true**.
 
 > [!IMPORTANT]
-> **Action Required:** If you do not enable this setting, the addon icon will remain black regardless of your theme and will not adapt to light or dark modes.
+> **Action Required:** If you do not enable this setting, the add-on icon will remain black regardless of your theme and will not adapt to light or dark modes.
 
 <div style="margin-top: 15px; margin-bottom: 20px;">
     <img src="notes/iconcoloring-transparent.png" alt="Dynamic Icon Coloring Comparison" width="60%" />
@@ -195,14 +195,14 @@ These steps will enable custom styling with the `userChrome.css` file.
 Inspiration and credits
 ---------------------------------------------
 
-*   This addon was inspired by Sidebery's *Dynamic Native Tabs* feature
+*   This add-on was inspired by Sidebery's *Dynamic Native Tabs* feature
     *   [Dynamic Native Tabs (Github Description)](https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs)
-    *   While Sidebery focuses on whether its own sidebar is displayed, this addon toggles only the native tab bar.
+    *   While Sidebery focuses on whether its own sidebar is displayed, this add-on toggles only the native tab bar.
     *   This allows both the sidebar and native tab bar to be shown simultaneously if desired.
-    *   You do not even have to show your sidebar to use this addon.
-    *   It also offers a more generic implementation that could work with other sidebar addons like *[Tree Style Tab](https://github.com/piroor/treestyletab)*.
+    *   You do not even have to show your sidebar to use this add-on.
+    *   It also offers a more generic implementation that could work with other sidebar add-ons like *[Tree Style Tab](https://github.com/piroor/treestyletab)*.
 
-*   Attribution for the base addon icon:
+*   Attribution for the base add-on icon:
     *   Icons made by [Freepik](https://www.flaticon.com/authors/freepik "Freepik") from [www.flaticon.com](https://www.flaticon.com/ "Flaticon").
 
 ## Version History
@@ -212,12 +212,14 @@ Inspiration and credits
 
 - **Vertical Tabs Support**: Updated CSS instructions to support Firefox 136+ native vertical tabs.
 - **Dynamic Icon Coloring**: Implemented dynamic SVG icons with `context-fill` to automatically match browser themes.
+- **Storage Modernization**: Migrated to the asynchronous `browser.storage.local` API for improved reliability and data persistence.
+- **Project Hardening**: Implemented CI/CD security best practices and standardized repository metadata (package.json).
 - **Project Reorganization**: Organized all project assets into logical directories (`icons/`, `ui/`, `options/`).
 - **Build Modernization**: Transitioned to the official Mozilla `web-ext` tool for standardized building and linting.
-- **Enhanced Options UI**: Redesigned the Options page with a modern, card-based responsive layout.
-- **Optimization**: Reduced final XPI package size by 25% (compared to v0.9.5) through improved exclusion rules and asset optimization, despite adding new documentation and features.
-- **Mozilla Compliance**: Added mandatory data collection permission flags to align with current Mozilla submission requirements.
-- **UI Polish**: Added professional favicons to all internal extension pages.
+- **Enhanced Options UI**: Redesigned the Options page with a modern layout, dynamic versioning, and theme-aware favicons.
+- **Optimization**: Reduced final XPI package size by 25% (compared to v0.9.5) through improved exclusion rules and asset optimization.
+- **Mozilla Compliance**: Updated naming to "add-on" terminology and added accessibility metadata.
+
 </details>
 
 <details>
@@ -235,7 +237,7 @@ Inspiration and credits
 <details>
 <summary><b>Version 0.9.3 (November 3, 2024) — Improved Instructions & Formatting</b></summary>
 
-- **Update Notifications**: Added Firefox 133 userChrome.css change instructions to be displayed after addon updates.
+- **Update Notifications**: Added Firefox 133 userChrome.css change instructions to be displayed after add-on updates.
 - **Dismissible Instructions**: Added a checkbox to disable showing installation instructions after an update until the next required change.
 - **OS-Specific Guides**: Integrated better formatting and PC/Mac specific instructions for initial userChrome.css setup.
 </details>
