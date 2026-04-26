@@ -10,34 +10,38 @@ function setPrefaceAndIcon() {
     });
 
     // Set the native SVG icon
-    let iconPath = hideTabBar ? 'icon-hidden.svg' : 'icon-visible.svg';
+    let iconPath = hideTabBar ? 'icons/icon-hidden.svg' : 'icons/icon-visible.svg';
     browser.browserAction.setIcon({ path: iconPath });
 }
 
 browser.runtime.onInstalled.addListener((details) => {
+    const currentVersion = browser.runtime.getManifest().version;
+
     if (details.reason === 'install') {
-        browser.tabs.create({ url: 'options.html' });
+        browser.tabs.create({ url: 'options/options.html' });
     } else if (details.reason === 'update') {
         const previousVersion = details.previousVersion;
-        const newVersion = browser.runtime.getManifest().version;
 
-        // Check if the previous version is 0.9.4 or older
-        if (previousVersion <= '0.9.4') {
-            // Set acknowledgeFF133Changes to false to force the user to acknowledge the changes
-            localStorage.setItem('acknowledgeFF133Changes', 'false');
+        // If the current version is different from the last acknowledged version,
+        // we might want to show the options page again.
+        const lastAcknowledged = localStorage.getItem('lastAcknowledgedVersion');
+
+        // Force show instructions for v0.9.6 update due to major reorganization and CSS changes
+        if (currentVersion === '0.9.6' && lastAcknowledged !== '0.9.6') {
+            localStorage.setItem('lastAcknowledgedVersion', '0.0.0');
         }
 
-        // Check if the acknowledgeFF133Changes flag is set to false
-        const acknowledged = localStorage.getItem('acknowledgeFF133Changes');
-        if (acknowledged === 'false') {
-            // Open the options.html page when the addon is updated
-            browser.tabs.create({ url: browser.runtime.getURL('options.html') });
+        // Migrate old flag if it exists
+        if (localStorage.getItem('acknowledgeFF133Changes') === 'false') {
+            localStorage.removeItem('acknowledgeFF133Changes');
+            localStorage.setItem('lastAcknowledgedVersion', '0.0.0');
         }
 
-        // Log the previous and new versions
-        console.log(`Addon updated from version ${previousVersion} to ${newVersion}`);
+        if (lastAcknowledged !== currentVersion) {
+            browser.tabs.create({ url: browser.runtime.getURL('options/options.html') });
+        }
 
-        // Get and log the Firefox version
+        console.log(`Addon updated from version ${previousVersion} to ${currentVersion}`);
         browser.runtime.getBrowserInfo().then((info) => {
             console.log(`Firefox version: ${info.version}`);
         });

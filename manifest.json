@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Toggle Native Tab Bar",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "Shows or hides the native tab bar",
   "homepage_url": "https://github.com/irvinm/Toggle-Native-Tab-Bar",
   "permissions": [],
@@ -11,25 +11,28 @@
     ]
   },
   "browser_action": {
-    "default_icon": "icon-visible.svg",
+    "default_icon": "icons/icon-visible.svg",
     "default_title": "Toggle Native Tab Bar"
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "Toggle-Native-Tab_Bar@irvinm.addons.mozilla.org"
+      "id": "Toggle-Native-Tab_Bar@irvinm.addons.mozilla.org",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   },
   "web_accessible_resources": [
-    "*.svg",
-    "prism.js",
-    "prism.css"
+    "icons/*.svg",
+    "options/prism.js",
+    "options/prism.css"
   ],
   "options_ui": {
-    "page": "options.html",
+    "page": "options/options.html",
     "open_in_tab": true
   },
   "icons": {
-    "128": "icon-visible.svg"
+    "128": "icons/icon-visible.svg"
   },
   "commands": {
     "toggle-tab-bar": {
