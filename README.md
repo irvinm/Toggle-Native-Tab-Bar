@@ -131,7 +131,7 @@ These steps will enable custom styling with the `userChrome.css` file.
 
 ### Explanation & Reference
 
-- This CSS targets TabsToolbar and hides the native tab bar when a certain condition is met.
+- This CSS targets the native tab bar components (horizontal and/or vertical) and hides them when a specific condition is met.
 - The condition is based on the `titlepreface` property, which this add-on manipulates by adding or removing a space (" ").
 - You can refer to Mozilla’s documentation for more details: [MDN WebExtensions API - windows.update](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update)
 
