@@ -180,14 +180,14 @@ These steps will enable custom styling with the `userChrome.css` file.
     * <div style="display: flex; align-items: center; margin-bottom: 10px; margin-top: 5px;">
         <picture>
           <source media="(prefers-color-scheme: dark)" srcset="icons/icon-visible-light.svg">
-          <img src="icons/icon-visible-dark.svg" alt="Visible Icon" width="24" style="margin-right: 10px;" />
+          <img src="icons/icon-visible-dark.svg" alt="Visible Icon" width="48" style="margin-right: 10px;" />
         </picture>
         <span>Indicates the native tab bar is currently <strong>visible</strong>. (Outer frame + tab line)</span>
       </div>
     * <div style="display: flex; align-items: center;">
         <picture>
           <source media="(prefers-color-scheme: dark)" srcset="icons/icon-hidden-light.svg">
-          <img src="icons/icon-hidden-dark.svg" alt="Hidden Icon" width="24" style="margin-right: 10px;" />
+          <img src="icons/icon-hidden-dark.svg" alt="Hidden Icon" width="48" style="margin-right: 10px;" />
         </picture>
         <span>Indicates the native tab bar is currently <strong>hidden</strong>. (Outer frame only)</span>
       </div>
