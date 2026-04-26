@@ -230,7 +230,7 @@ These steps will enable custom styling with the `userChrome.css` file.
 
 - **Update Notifications**: Added Firefox 133 userChrome.css change instructions to be displayed after add-on updates.
 - **Dismissible Instructions**: Added a checkbox to disable showing installation instructions after an update until the next required change.
-- **OS-Specific Guides**: Integrated better formatting and PC/Mac specific instructions for initial userChrome.css setup.
+- **OS-Specific Guides**: Integrated better formatting and PC/Mac-specific instructions for initial userChrome.css setup.
 </details>
 
 <details>
