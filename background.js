@@ -44,28 +44,28 @@ browser.runtime.onInstalled.addListener(async (details) => {
     } else if (details.reason === 'update') {
         const previousVersion = details.previousVersion;
         
-        // Re-read storage to ensure we have the most authoritative values after potential migrations
-        const storage = await browser.storage.local.get(['lastAcknowledgedVersion', 'acknowledgeFF133Changes']);
+        // Re-read storage to ensure we have the most authoritative values
+        const storage = await browser.storage.local.get(['lastAcknowledgedVersion', 'showUpdatePage', 'acknowledgeFF133Changes']);
         let lastAcknowledged = storage.lastAcknowledgedVersion;
+        let showUpdatePage = storage.showUpdatePage !== undefined ? storage.showUpdatePage : true;
 
-        // // TODO(remove-after-0.9.6): Force show instructions for v0.9.6 update due to major reorganization
-        if (currentVersion === '0.9.6' && lastAcknowledged !== '0.9.6') {
-            lastAcknowledged = '0.0.0';
-            await browser.storage.local.set({ lastAcknowledgedVersion: lastAcknowledged });
-        }
+        // Force show instructions for v0.9.6 update due to major reorganization
+        // This overrides the user's "skip" preference just for this version
+        let isCriticalUpdate = (currentVersion === '0.9.6' && lastAcknowledged !== '0.9.6');
 
-        // // TODO(remove-after-0.9.6): Migrate/Cleanup old flag
+        // Migrate/Cleanup old flag
         if (storage.acknowledgeFF133Changes !== undefined || localStorage.getItem('acknowledgeFF133Changes') !== null) {
             const legacyVal = storage.acknowledgeFF133Changes || localStorage.getItem('acknowledgeFF133Changes');
-            if (legacyVal === 'false') {
-                lastAcknowledged = '0.0.0';
-                await browser.storage.local.set({ lastAcknowledgedVersion: lastAcknowledged });
+            if (legacyVal === 'true' || legacyVal === true) {
+                showUpdatePage = false;
             }
+            await browser.storage.local.set({ showUpdatePage });
             await browser.storage.local.remove('acknowledgeFF133Changes');
             localStorage.removeItem('acknowledgeFF133Changes');
         }
 
-        if (lastAcknowledged !== currentVersion) {
+        // Only open the tab if the user wants it, OR if it's a critical update
+        if (lastAcknowledged !== currentVersion && (showUpdatePage || isCriticalUpdate)) {
             await browser.tabs.create({ url: browser.runtime.getURL('options/options.html') });
         }
 
