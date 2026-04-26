@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Toggle Native Tab Bar",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "Shows or hides the native tab bar",
   "homepage_url": "https://github.com/irvinm/Toggle-Native-Tab-Bar",
   "permissions": ["storage"],
@@ -32,7 +32,7 @@
     "open_in_tab": true
   },
   "icons": {
-    "128": "icons/icon-visible.svg"
+    "128": "icons/icon-visible-dark.png"
   },
   "commands": {
     "toggle-tab-bar": {
