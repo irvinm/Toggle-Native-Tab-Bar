@@ -199,7 +199,7 @@ These steps will enable custom styling with the `userChrome.css` file.
 ## Version History
 
 <details open>
-<summary><b>Version 0.9.7 (April 26, 2026) — Icon Refresh</b></summary>
+<summary><b>Version 0.9.7.1 (April 26, 2026) — Icon Refresh</b></summary>
 
 - **Icon Refresh**: Use the AMO icon for both about:addons page and AMO.
 

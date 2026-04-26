@@ -1,6 +1,6 @@
 {
   "name": "toggle-native-tab-bar",
-  "version": "0.9.7",
+  "version": "0.9.7.1",
   "private": true,
   "description": "Shows or hides the native tab bar",
   "license": "MIT",
