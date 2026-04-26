@@ -19,16 +19,16 @@ Firefox now offers two types of sidebars that can be used in combination with th
     *   *Note: In **Vertical Tabs** mode, these selections are integrated directly into the vertical tab bar.*
 
 #### Horizontal Tabs - Traditional Sidebar (TST)
-<video src="demo/Horizontal_Tabs-Normal_Sidebar_TST.mp4" width="100%" controls></video>
+![Horizontal Tabs - Traditional Sidebar (TST)](demo/Horizontal_Tabs-Normal_Sidebar_TST.mp4)
 
 #### Horizontal Tabs - New Sidebar (Select)
-<video src="demo/Horizontal_Tabs-Sidebar.mp4" width="100%" controls></video>
+![Horizontal Tabs - New Sidebar (Select)](demo/Horizontal_Tabs-Sidebar.mp4)
 
 #### Horizontal Tabs - Both Sidebars Visible
-<video src="demo/Horizontal_Tabs-Sidebar-Normal_Sidebar_TST.mp4" width="100%" controls></video>
+![Horizontal Tabs - Both Sidebars Visible](demo/Horizontal_Tabs-Sidebar-Normal_Sidebar_TST.mp4)
 
 #### Vertical Tabs - Integrated Vertical Mode
-<video src="demo/Vertical_Tabs.mp4" width="100%" controls></video>
+![Vertical Tabs - Integrated Vertical Mode](demo/Vertical_Tabs.mp4)
 
 > [!NOTE]
 > These examples show the addon toggling the native tab bar while correctly preserving the state of both the traditional and new sidebar elements.
