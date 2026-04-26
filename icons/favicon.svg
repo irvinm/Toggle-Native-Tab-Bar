@@ -1,0 +1,22 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    path, rect {
+      fill: black;
+      stroke: black;
+    }
+    @media (prefers-color-scheme: dark) {
+      path, rect {
+        fill: white;
+        stroke: white;
+      }
+    }
+  </style>
+  <g id="icon">
+    <path id="corner" d="M22.5 150 V22.5 H122.5" stroke-width="45" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <use href="#corner" transform="translate(512 0) scale(-1 1)" />
+    <use href="#corner" transform="translate(0 512) scale(1 -1)" />
+    <use href="#corner" transform="translate(512 512) scale(-1 -1)" />   
+    <rect x="100" y="100" width="312" height="60" rx="20" />
+    <rect x="100" y="100" width="60" height="312" rx="20" />
+  </g>
+</svg>

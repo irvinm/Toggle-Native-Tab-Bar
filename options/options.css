@@ -1,0 +1,267 @@
+body {
+    background-color: #333;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.options-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.header-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.header-icon-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-arrow {
+    width: 44px;
+    height: 24px;
+    color: #0078d4;
+}
+
+
+
+h3 {
+    text-decoration: underline;
+}
+
+code {
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 90%;
+    color: #8f0000;
+    background-color: #d7ced1;
+}
+
+#firefox-version {
+    background-color: rgba(255, 255, 0, 0.2);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    display: inline-block;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 0, 0.3);
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+h2 {
+    color: #0078d4;
+    font-size: 1.5em;
+    margin-top: 0;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Prism overrides/additions to match the theme better */
+pre[class*="language-"] {
+    margin: 1em 0;
+    padding: 1.5em;
+    font-size: 0.95em;
+    line-height: 1.6;
+    border: 1px solid #444;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+code[class*="language-"] {
+    font-size: 1em;
+}
+
+.collapsible-content {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    overflow: hidden;
+    max-height: 5000px;
+    /* Large enough to fit content */
+    opacity: 1;
+}
+
+.collapsible-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.dismiss-container {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border-left: 5px solid #0078d4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dismiss-container p {
+    margin: 0;
+}
+
+#show-instructions-btn, .button-link {
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#show-instructions-btn:hover, .button-link:hover {
+    background-color: #005a9e;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.upgrade-banner {
+    background-color: #0078d4;
+    color: white;
+    padding: 10px 20px;
+    margin: 0px 0px 20px 0px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+}
+
+#dismiss-upgrade-btn {
+    background: white;
+    color: #0078d4;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.instruction-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 20px;
+    align-items: flex-start;
+    max-width: 1600px;
+    /* Limit overall width to prevent excessive stretching */
+}
+
+.column {
+    flex: 1 1 450px;
+    /* Grow/shrink, with 450px as the target width before wrapping */
+    min-width: 0;
+    /* Allow columns to shrink below 450px on very small screens if needed */
+}
+
+/* Ensure code blocks don't force columns to be too wide */
+
+
+.column h3 {
+    margin-top: 0;
+    font-size: 1.3em;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.card {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.update-notice {
+    border: 2px solid #d13438;
+    background-color: rgba(209, 52, 56, 0.1);
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.update-notice h2 {
+    color: #d13438;
+    border-bottom-color: rgba(209, 52, 56, 0.3);
+}
+
+.important-action {
+    margin-top: 15px;
+    padding: 12px 16px;
+    background-color: rgba(255, 255, 0, 0.05);
+    border-left: 4px solid yellow;
+    color: #fff;
+    list-style-type: none;
+    font-size: 0.95em;
+    line-height: 1.5;
+    border-radius: 0 4px 4px 0;
+}
+
+.icon-small {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.icon-inline {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.theme-comparison-img {
+    width: 40%;
+    height: auto;
+    vertical-align: top;
+    border: 2px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    border-top: 1px solid #444;
+    text-align: center;
+    color: #888;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #0078d4;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+.important-action strong {
+    color: yellow;
+    text-transform: uppercase;
+    margin-right: 5px;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "toggle-native-tab-bar",
+  "version": "0.9.6",
+  "private": true,
+  "description": "Shows or hides the native tab bar",
+  "license": "MIT",
+  "author": "irvinm",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/irvinm/Toggle-Native-Tab-Bar.git"
+  },
+  "scripts": {
+    "start": "web-ext run",
+    "build": "web-ext build --overwrite-dest",
+    "lint": "web-ext lint"
+  },
+  "devDependencies": {
+    "web-ext": "^10.1.0"
+  }
+}

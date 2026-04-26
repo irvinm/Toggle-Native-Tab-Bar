@@ -1,0 +1,19 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlns:context="http://www.mozilla.org/context-properties">
+  <style>
+    path, rect {
+      fill: black;
+      stroke: black;
+    }
+  </style>
+  <g id="icon">
+    <!-- Corner Brackets moved to edges (stroke-width/2 = 22.5) -->
+    <!-- upper-left: original -->
+    <path id="corner" d="M22.5 150 V22.5 H122.5" stroke-width="45" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="black"/>
+    <!-- upper-right: mirror horizontally -->
+    <use href="#corner" transform="translate(512 0) scale(-1 1)" />
+    <!-- bottom-left: mirror vertically -->
+    <use href="#corner" transform="translate(0 512) scale(1 -1)" />
+    <!-- bottom-right: mirror both axes -->
+    <use href="#corner" transform="translate(512 512) scale(-1 -1)" />
+  </g>
+</svg>
