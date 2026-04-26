@@ -187,7 +187,7 @@ These steps will enable custom styling with the `userChrome.css` file.
 ## Inspiration and credits
 
 *   This add-on was inspired by Sidebery's *Dynamic Native Tabs* feature
-    *   [Dynamic Native Tabs (Github Description)](https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs)
+    *   [Dynamic Native Tabs (GitHub Description)](https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#dynamic-native-tabs)
     *   While Sidebery focuses on whether its own sidebar is displayed, this add-on toggles only the native tab bar.
     *   This allows both the sidebar and native tab bar to be shown simultaneously if desired.
     *   You do not even have to show your sidebar to use this add-on.
