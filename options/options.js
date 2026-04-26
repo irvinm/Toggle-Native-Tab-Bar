@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await browser.storage.local.set({ lastAcknowledgedVersion: currentVersion });
         if (checkbox) {
             checkbox.checked = true;
+            checkbox.dispatchEvent(new Event('change'));
         }
         hideInstructions();
     }
