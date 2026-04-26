@@ -21,8 +21,11 @@ Used strictly for the `README.md` and other markdown documentation.
 *   **`icon-*-dark.svg`**: Hardcoded white icons for display on dark backgrounds.
 *   **Technical Note**: These are used in HTML `<picture>` tags within the README to provide static previews for users browsing the repository on GitHub.
 
-### 4. Legacy Assets
-*   **`*.png`**: Legacy bitmap versions of the icons. These are kept for backward compatibility but are not used in the current version of the extension.
+### 4. AMO Assets
+*   **`icon-visible-dark.png`**: High-resolution black icon used for the extension's listing on AMO (Mozilla Add-ons), as AMO does not support SVG files for marketplace icons.
+
+### 5. Legacy Assets
+*   **`icon-visible.png`**, **`icon-hidden.png`**: Legacy bitmap versions of the icons. These are kept for backward compatibility or reference but are not used in the current version of the extension.
 
 ## Development Rules
 1.  **When updating the design**: Apply changes across all SVG versions to ensure consistency.

@@ -4,7 +4,7 @@ Toggle the visibility of your Firefox tab bar (horizontal or native vertical tab
 
 # Description
 
-Toggle Native Tab Bar gives you complete control over your browser's real estate. Whether you prefer the classic horizontal layout or the new native vertical tabs, this extension allows you to toggle that bar on and off instantly whenever you need it. It is the perfect companion for sidebar extensions like **Tree Style Tab** or **Sidebery**.
+Toggle Native Tab Bar gives you complete control over your browser's real estate. Whether you prefer the classic horizontal layout or the new native vertical tabs, this extension allows you to toggle that bar on and off instantly whenever you need it. It is the perfect companion for sidebar extensions like **Tree Style Tab**.
 
 **Advanced Support & Customization:**
 * **Native Tab Support:** Fully compatible with both standard horizontal and the latest native vertical tab features.
