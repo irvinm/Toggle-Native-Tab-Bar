@@ -208,7 +208,7 @@ Inspiration and credits
 ## Version History
 
 <details open>
-<summary><b>Version 0.9.6 (April 25, 2026) — Vertical Tabs Support & Dynamic Icon Coloring</b></summary>
+<summary><b>Version 0.9.6 (April 26, 2026) — Vertical Tabs Support & Dynamic Icon Coloring</b></summary>
 
 - **Vertical Tabs Support**: Updated CSS instructions to support Firefox 136+ native vertical tabs.
 - **Dynamic Icon Coloring**: Implemented dynamic SVG icons with `context-fill` to automatically match browser themes.
