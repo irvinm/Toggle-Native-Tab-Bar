@@ -178,11 +178,17 @@ These steps will enable custom styling with the `userChrome.css` file.
 
 *   The toolbar icon changes to reflect the current state of the native tab bar:
     * <div style="display: flex; align-items: center; margin-bottom: 10px; margin-top: 5px;">
-        <img src="icons/icon-visible.png" alt="Visible Icon" width="5%" style="margin-right: 10px;" />
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="icons/icon-visible-light.svg">
+          <img src="icons/icon-visible-dark.svg" alt="Visible Icon" width="24" style="margin-right: 10px;" />
+        </picture>
         <span>Indicates the native tab bar is currently <strong>visible</strong>. (Outer frame + tab line)</span>
       </div>
     * <div style="display: flex; align-items: center;">
-        <img src="icons/icon-hidden.png" alt="Hidden Icon" width="5%" style="margin-right: 10px;" />
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="icons/icon-hidden-light.svg">
+          <img src="icons/icon-hidden-dark.svg" alt="Hidden Icon" width="24" style="margin-right: 10px;" />
+        </picture>
         <span>Indicates the native tab bar is currently <strong>hidden</strong>. (Outer frame only)</span>
       </div>
 
