@@ -55,7 +55,7 @@ These steps will enable custom styling with the `userChrome.css` file.
 ---------------------------------------------
 
 1. Open the `userChrome.css` file you created earlier in the `chrome` folder.
-2. Add the one of these CSS solutions to your `userChrome.css` file (below).
+2. Add one of these CSS solutions to your `userChrome.css` file (below).
 3. Save your userChrome.css file and restart Firefox to apply the changes.
 
 ### Handling horizontal tab bar (only)

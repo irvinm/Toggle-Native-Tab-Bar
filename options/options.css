@@ -28,9 +28,7 @@ body {
     color: #0078d4;
 }
 
-h2 {
-    color: red;
-}
+
 
 h3 {
     text-decoration: underline;
@@ -76,6 +74,8 @@ pre[class*="language-"] {
     font-size: 0.95em;
     line-height: 1.6;
     border: 1px solid #444;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 code[class*="language-"] {
@@ -173,10 +173,7 @@ code[class*="language-"] {
 }
 
 /* Ensure code blocks don't force columns to be too wide */
-pre[class*="language-"] {
-    max-width: 100%;
-    overflow-x: auto;
-}
+
 
 .column h3 {
     margin-top: 0;

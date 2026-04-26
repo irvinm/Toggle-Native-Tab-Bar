@@ -4,12 +4,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     const showBtn = document.getElementById('show-instructions-btn');
     const upgradeBanner = document.getElementById('upgrade-dismiss-banner');
     const dismissUpgradeBtn = document.getElementById('dismiss-upgrade-btn');
+    const addonVersionSpan = document.getElementById('addon-version');
 
-    // Original checkbox (keep for backward compatibility if user wants to toggle within instructions)
-    const checkbox = document.getElementById('acknowledge-FF133-checkbox');
+    // Rename checkbox ID for version-agnosticism
+    const checkbox = document.getElementById('acknowledge-version-checkbox');
 
     const currentVersion = browser.runtime.getManifest().version;
-    const lastAcknowledged = localStorage.getItem('lastAcknowledgedVersion');
+    
+    // Use asynchronous browser.storage.local instead of localStorage
+    const storage = await browser.storage.local.get('lastAcknowledgedVersion');
+    const lastAcknowledged = storage.lastAcknowledgedVersion;
+
+    if (addonVersionSpan) {
+        addonVersionSpan.textContent = `v${currentVersion}`;
+    }
 
     function hideInstructions() {
         instructions.classList.add('collapsed');
@@ -22,8 +30,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         dismissContainer.classList.add('hidden');
     }
 
-    function acknowledgeCurrentVersion() {
-        localStorage.setItem('lastAcknowledgedVersion', currentVersion);
+    async function updateBannerVisibility() {
+        const { lastAcknowledgedVersion } = await browser.storage.local.get('lastAcknowledgedVersion');
+        if (lastAcknowledgedVersion === currentVersion) {
+            hideInstructions();
+        } else {
+            showInstructions();
+            if (lastAcknowledgedVersion) {
+                upgradeBanner.classList.remove('hidden');
+            } else {
+                upgradeBanner.classList.add('hidden');
+            }
+        }
+    }
+
+    async function acknowledgeCurrentVersion() {
+        await browser.storage.local.set({ lastAcknowledgedVersion: currentVersion });
+        if (checkbox) {
+            checkbox.checked = true;
+        }
         hideInstructions();
     }
 
@@ -44,12 +69,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (checkbox) {
         checkbox.checked = (lastAcknowledged === currentVersion);
-        checkbox.addEventListener('change', () => {
+        checkbox.addEventListener('change', async () => {
             if (checkbox.checked) {
-                acknowledgeCurrentVersion();
+                await acknowledgeCurrentVersion();
             } else {
-                localStorage.removeItem('lastAcknowledgedVersion');
-                showInstructions();
+                await browser.storage.local.remove('lastAcknowledgedVersion');
+                await updateBannerVisibility();
             }
         });
     }
@@ -57,7 +82,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Get the Firefox version and display it
     browser.runtime.getBrowserInfo().then((info) => {
         const versionElement = document.getElementById('firefox-version');
-        versionElement.textContent = `You are using Firefox version: ${info.version}`;
+        if (versionElement) {
+            versionElement.textContent = `You are using Firefox version: ${info.version}`;
+        }
     }).catch((error) => {
         console.error('Error getting Firefox version:', error);
     });

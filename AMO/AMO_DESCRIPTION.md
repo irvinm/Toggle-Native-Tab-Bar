@@ -18,7 +18,7 @@ Toggle Native Tab Bar gives you complete control over your browser's real estate
 * **Performance Optimized:** Extremely lightweight with zero impact on browser speed.
 
 **Important: Setup Required**
-Because Firefox does not allow extensions to hide the tab bar directly, this addon requires a small amount of one-time setup:
+Because Firefox does not allow extensions to hide the tab bar directly, this add-on requires a small amount of one-time setup:
 1. Enable **userChrome.css** support in your Firefox profile.
 2. Add a few lines of CSS to your **userChrome.css** file.
 

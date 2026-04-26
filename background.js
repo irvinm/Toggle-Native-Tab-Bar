@@ -1,50 +1,77 @@
-let hideTabBar = JSON.parse(localStorage.getItem('hideTabBar')) || false;
+let hideTabBar = false;
 
-function setPrefaceAndIcon() {
+async function setPrefaceAndIcon() {
     // Set Preface for all open windows
-    browser.windows.getAll().then((windows) => {
-        let titlePreface = hideTabBar ? " " : "";
-        windows.forEach((window) => {
-            browser.windows.update(window.id, { titlePreface: titlePreface });
-        });
-    });
+    const windows = await browser.windows.getAll();
+    const titlePreface = hideTabBar ? " " : "";
+    
+    for (const window of windows) {
+        await browser.windows.update(window.id, { titlePreface: titlePreface });
+    }
 
     // Set the native SVG icon
-    let iconPath = hideTabBar ? 'icons/icon-hidden.svg' : 'icons/icon-visible.svg';
-    browser.browserAction.setIcon({ path: iconPath });
+    const iconPath = hideTabBar ? 'icons/icon-hidden.svg' : 'icons/icon-visible.svg';
+    await browser.browserAction.setIcon({ path: iconPath });
 }
 
-browser.runtime.onInstalled.addListener((details) => {
+async function initialize() {
+    // Migrate from localStorage to browser.storage.local
+    const storage = await browser.storage.local.get(['hideTabBar', 'lastAcknowledgedVersion', 'acknowledgeFF133Changes']);
+    
+    // Check if we need to migrate from localStorage (for existing users)
+    if (localStorage.getItem('hideTabBar') !== null) {
+        hideTabBar = JSON.parse(localStorage.getItem('hideTabBar'));
+        await browser.storage.local.set({ hideTabBar });
+        localStorage.removeItem('hideTabBar');
+    } else {
+        hideTabBar = storage.hideTabBar || false;
+    }
+
+    if (localStorage.getItem('lastAcknowledgedVersion') !== null) {
+        await browser.storage.local.set({ lastAcknowledgedVersion: localStorage.getItem('lastAcknowledgedVersion') });
+        localStorage.removeItem('lastAcknowledgedVersion');
+    }
+
+    await setPrefaceAndIcon();
+}
+
+browser.runtime.onInstalled.addListener(async (details) => {
+    await initialize();
     const currentVersion = browser.runtime.getManifest().version;
 
     if (details.reason === 'install') {
-        browser.tabs.create({ url: 'options/options.html' });
+        await browser.tabs.create({ url: 'options/options.html' });
     } else if (details.reason === 'update') {
         const previousVersion = details.previousVersion;
+        
+        // Re-read storage to ensure we have the most authoritative values after potential migrations
+        const storage = await browser.storage.local.get(['lastAcknowledgedVersion', 'acknowledgeFF133Changes']);
+        let lastAcknowledged = storage.lastAcknowledgedVersion;
 
-        // If the current version is different from the last acknowledged version,
-        // we might want to show the options page again.
-        const lastAcknowledged = localStorage.getItem('lastAcknowledgedVersion');
-
-        // Force show instructions for v0.9.6 update due to major reorganization and CSS changes
+        // // TODO(remove-after-0.9.6): Force show instructions for v0.9.6 update due to major reorganization
         if (currentVersion === '0.9.6' && lastAcknowledged !== '0.9.6') {
-            localStorage.setItem('lastAcknowledgedVersion', '0.0.0');
+            lastAcknowledged = '0.0.0';
+            await browser.storage.local.set({ lastAcknowledgedVersion: lastAcknowledged });
         }
 
-        // Migrate old flag if it exists
-        if (localStorage.getItem('acknowledgeFF133Changes') === 'false') {
+        // // TODO(remove-after-0.9.6): Migrate/Cleanup old flag
+        if (storage.acknowledgeFF133Changes !== undefined || localStorage.getItem('acknowledgeFF133Changes') !== null) {
+            const legacyVal = storage.acknowledgeFF133Changes || localStorage.getItem('acknowledgeFF133Changes');
+            if (legacyVal === 'false') {
+                lastAcknowledged = '0.0.0';
+                await browser.storage.local.set({ lastAcknowledgedVersion: lastAcknowledged });
+            }
+            await browser.storage.local.remove('acknowledgeFF133Changes');
             localStorage.removeItem('acknowledgeFF133Changes');
-            localStorage.setItem('lastAcknowledgedVersion', '0.0.0');
         }
 
         if (lastAcknowledged !== currentVersion) {
-            browser.tabs.create({ url: browser.runtime.getURL('options/options.html') });
+            await browser.tabs.create({ url: browser.runtime.getURL('options/options.html') });
         }
 
-        console.log(`Addon updated from version ${previousVersion} to ${currentVersion}`);
-        browser.runtime.getBrowserInfo().then((info) => {
-            console.log(`Firefox version: ${info.version}`);
-        });
+        console.log(`Add-on updated from version ${previousVersion} to ${currentVersion}`);
+        const info = await browser.runtime.getBrowserInfo();
+        console.log(`Firefox version: ${info.version}`);
     }
 });
 
@@ -61,10 +88,10 @@ browser.commands.onCommand.addListener((command) => {
 });
 
 // Function to toggle the tab bar
-function toggleTabBar() {
+async function toggleTabBar() {
     hideTabBar = !hideTabBar;
-    localStorage.setItem('hideTabBar', JSON.stringify(hideTabBar));
-    setPrefaceAndIcon();
+    await browser.storage.local.set({ hideTabBar });
+    await setPrefaceAndIcon();
 }
 
 // Listen for when a new window is created
@@ -72,5 +99,5 @@ browser.windows.onCreated.addListener((window) => {
     setPrefaceAndIcon();
 });
 
-// Initialize the addon by setting the titlePreface for all open windows
-setPrefaceAndIcon();
+// Start initialization
+initialize();
