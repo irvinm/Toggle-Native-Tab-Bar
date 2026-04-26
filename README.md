@@ -9,29 +9,35 @@
 <!-- https://shields.io/badges -->
 <!-- https://github.com/badges/shields -->
 
-**Companion for Sidebars:** Perfect for users of **Tree Style Tab**, **Sidebery**, or other vertical tab extensions.
+Description
+-----------------------------------------------
+Toggle Native Tab Bar gives you complete control over your browser's real estate. Whether you prefer the classic horizontal layout or the new native vertical tabs, this extension allows you to toggle that bar on and off instantly whenever you need it. It is the perfect companion for sidebar extensions like **Tree Style Tab** or **Sidebery**.
 
-### Functionality Examples
+Functionality examples
+-----------------------------------------------
 
 Firefox now offers two types of sidebars that can be used in combination with this addon:
 *   **Traditional Sidebar:** The standard sidebar used by extensions like **Tree Style Tab** or **Sidebery**.
 *   **New Sidebar (Select):** The modern Firefox sidebar that allows switching between different sidebar views. 
     *   *Note: In **Vertical Tabs** mode, these selections are integrated directly into the vertical tab bar.*
 
-#### Horizontal Tabs - Traditional Sidebar (TST)
-![Horizontal Tabs - Traditional Sidebar (TST)](demo/Horizontal_Tabs-Normal_Sidebar_TST.mp4)
+#### Horizontal Tabs + Traditional Sidebar (TST)
+https://github.com/user-attachments/assets/9de03ad8-a1fc-46ab-ae91-aa82222c6176
 
-#### Horizontal Tabs - New Sidebar (Select)
-![Horizontal Tabs - New Sidebar (Select)](demo/Horizontal_Tabs-Sidebar.mp4)
+#### Horizontal Tabs + New Sidebar (Select)
+https://github.com/user-attachments/assets/487062e3-ef13-4731-897b-7a51c13073bb
 
-#### Horizontal Tabs - Both Sidebars Visible
-![Horizontal Tabs - Both Sidebars Visible](demo/Horizontal_Tabs-Sidebar-Normal_Sidebar_TST.mp4)
+#### Horizontal Tabs + Both Sidebars Visible
+https://github.com/user-attachments/assets/a9bd1419-f971-4bf3-8e38-17ef06ae9046
 
 #### Vertical Tabs - Integrated Vertical Mode
-![Vertical Tabs - Integrated Vertical Mode](demo/Vertical_Tabs.mp4)
+https://github.com/user-attachments/assets/46f8fd9c-0919-44bf-a161-1b8b314e2b38
 
 > [!NOTE]
 > These examples show the addon toggling the native tab bar while correctly preserving the state of both the traditional and new sidebar elements.
+
+How to use configure Toggle Native Tab Bar
+-----------------------------------------------
 
 (REQUIRED) Enable userChrome.css in Firefox (Skip if already enabled)
 ----------------------------------------------------------------------------------------
@@ -49,7 +55,8 @@ These steps will enable custom styling with the `userChrome.css` file.
 ---------------------------------------------
 
 1. Open the `userChrome.css` file you created earlier in the `chrome` folder.
-2. Add the one of these CSS solutions to your `userChrome.css` file:
+2. Add the one of these CSS solutions to your `userChrome.css` file (below).
+3. Save your userChrome.css file and restart Firefox to apply the changes.
 
 ### Handling horizontal tab bar (only)
 
@@ -126,7 +133,6 @@ These steps will enable custom styling with the `userChrome.css` file.
 <div style="display: flex; align-items: center; margin-bottom: 10px; margin-top: 5px;">
     <img src="ui/NativeButtons.png" alt="Using native buttons" style="margin-right: 10px;" />
 </div>
-3. Save your userChrome.css file and restart Firefox to apply the changes.
 
 **Explanation**
 - This CSS targets TabsToolbar and hides the native tab bar when a certain condition is met.
@@ -139,7 +145,7 @@ These steps will enable custom styling with the `userChrome.css` file.
 ---------------------------------------------
 
 *   When the native tabs are hidden, the minimize, maximize, and close buttons are not directly accessible. Here are some workarounds:
-    *   Use the new CSS solution to keep the Firefox native min/max/close buttons.
+    *   Use the current CSS solution to keep the Firefox native min/max/close buttons. (RECOMMENDED)
     *   Use this addon to temporarily show the native tab bar and regain access to the native window control buttons.
     *   Use keyboard shortcuts:
         *   `Alt+Space, N` for minimize
@@ -150,7 +156,7 @@ These steps will enable custom styling with the `userChrome.css` file.
         *   [Minimize the Window](https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/)
         *   [Maximize the Window](https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/)
         *   [Close the Window](https://addons.mozilla.org/en-US/firefox/addon/close-the-window/)
-        *   <img src="ui/MinMaxClose.png" alt="Min\Max\Close Emulation" width="30%" /> -- These addons can replace the native buttons.
+        *   <img src="ui/MinMaxClose.png" alt="Min\Max\Close Emulation" width="30%" />
 
 
 
@@ -162,13 +168,13 @@ These steps will enable custom styling with the `userChrome.css` file.
     1. Go to `about:config`.
     2. Set `svg.context-properties.content.enabled` to **true**.
 
-    > [!IMPORTANT]
-    > **Action Required:** If you do not enable this setting, the addon icon will remain black regardless of your theme and will not adapt to light or dark modes.
+> [!IMPORTANT]
+> **Action Required:** If you do not enable this setting, the addon icon will remain black regardless of your theme and will not adapt to light or dark modes.
 
-    <div style="margin-top: 15px; margin-bottom: 20px;">
-        <img src="notes/iconcoloring-transparent.png" alt="Dynamic Icon Coloring Comparison" width="60%" />
-        <p><i>The icon color automatically adapts to match your browser theme's text color.</i></p>
-    </div>
+<div style="margin-top: 15px; margin-bottom: 20px;">
+    <img src="notes/iconcoloring-transparent.png" alt="Dynamic Icon Coloring Comparison" width="60%" />
+    <p><i>The icon color automatically adapts to match your browser theme's text color.</i></p>
+</div>
 
 *   The toolbar icon changes to reflect the current state of the native tab bar:
     * <div style="display: flex; align-items: center; margin-bottom: 10px; margin-top: 5px;">
