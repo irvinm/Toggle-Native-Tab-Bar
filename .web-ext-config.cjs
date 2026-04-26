@@ -14,9 +14,7 @@ module.exports = {
     'makefile',
     'README.md',
     'LICENSE',
-    'Demo.gif',
-    '*-False.png',
-    '*-True.png',
+    'demo/',
     'test/',
     'node_modules/',
     '.web-ext-config.cjs'

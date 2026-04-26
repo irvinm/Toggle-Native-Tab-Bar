@@ -11,10 +11,22 @@
 
 **Companion for Sidebars:** Perfect for users of **Tree Style Tab**, **Sidebery**, or other vertical tab extensions.
 
-How to use Toggle Native Tab Bar
-================================
+### Functionality Examples
 
-![Demo](https://github.com/irvinm/Toggle-Native-Tab-Bar/blob/main/Demo.gif)
+Firefox now offers two types of sidebars that can be used in combination with this addon:
+*   **Traditional Sidebar:** The standard sidebar used by extensions like **Tree Style Tab** or **Sidebery**.
+*   **New Sidebar (Select):** The modern Firefox sidebar that allows switching between different sidebar views. 
+    *   *Note: In **Vertical Tabs** mode, these selections are integrated directly into the vertical tab bar.*
+
+| Tab Mode | Sidebar Configuration | Example Video |
+| :--- | :--- | :--- |
+| **Horizontal** | **Traditional Sidebar (TST)** | [View Demo](demo/Horizontal_Tabs+Normal_Sidebar_TST.mp4) |
+| **Horizontal** | **New Sidebar (Select)** | [View Demo](demo/Horizontal_Tabs+Sidebar.mp4) |
+| **Horizontal** | **Both Sidebars Visible** | [View Demo](demo/Horizontal_Tabs+Sidebar+Normal_Sidebar_TST.mp4) |
+| **Vertical** | **Integrated Vertical Mode** | [View Demo](demo/Vertical_Tabs.mp4) |
+
+> [!NOTE]
+> These examples show the addon toggling the native tab bar while correctly preserving the state of both the traditional and new sidebar elements.
 
 (REQUIRED) Enable userChrome.css in Firefox (Skip if already enabled)
 ----------------------------------------------------------------------------------------
