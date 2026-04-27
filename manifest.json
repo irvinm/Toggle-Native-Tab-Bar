@@ -32,7 +32,8 @@
     "open_in_tab": true
   },
   "icons": {
-    "128": "icons/icon-visible-dark.png"
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
   },
   "commands": {
     "toggle-tab-bar": {
