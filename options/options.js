@@ -33,13 +33,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         return 0;
     }
 
+    let currentRenderController = null;
+
     async function renderChangelog(lastAck, showAll = false) {
         if (!changelogContainer) return;
         
+        if (currentRenderController) {
+            currentRenderController.abort();
+        }
+        currentRenderController = new AbortController();
+        const signal = currentRenderController.signal;
+
         try {
-            const response = await fetch('changelog.json');
+            const response = await fetch('changelog.json', { signal });
             const changelog = await response.json();
             
+            if (signal.aborted) return;
             changelogContainer.innerHTML = ''; 
             let displayedCount = 0;
             
@@ -77,10 +86,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
             
-            if (displayedCount === 0 && !showAll) {
+            if (displayedCount === 0 && !showAll && !signal.aborted) {
                 changelogContainer.innerHTML = '<p>No new updates to show.</p>';
             }
         } catch (e) {
+            if (e.name === 'AbortError') return;
             changelogContainer.innerHTML = '<p>Error loading updates.</p>';
         }
     }
