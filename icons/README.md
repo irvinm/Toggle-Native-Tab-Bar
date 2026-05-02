@@ -22,9 +22,13 @@ Used strictly for the `README.md` and other markdown documentation.
 *   **Technical Note**: These are used in HTML `<picture>` tags within the README to provide static previews for users browsing the repository on GitHub.
 
 ### 4. AMO Assets
-*   **`icon-48.png`**, **`icon-128.png`**: High-resolution black icons explicitly sized for Firefox's Add-ons Manager (`about:addons`) and the AMO marketplace. Using exact sizes ensures Firefox parses them correctly and acts as a cache-buster.
+*   **`icon-48.png`**, **`icon-128.png`**, **`icon-512.png`**: High-resolution black icons with a subtle border, explicitly sized for Firefox's Add-ons Manager (`about:addons`) and the AMO marketplace. Using exact sizes ensures Firefox parses them correctly and acts as a cache-buster.
+*   **`icon-48-org.png`**, **`icon-128-org.png`**: Original versions of the icons (without the border).
 
-### 5. Legacy Assets
+### 5. Design Source Files
+*   **`icon-visible2.psd`**: The master Photoshop design file. This is used for generating the high-resolution PNG assets and should be kept as the source of truth for the bitmap icons.
+
+### 6. Legacy Assets
 *   **`icon-visible.png`**, **`icon-hidden.png`**: Legacy bitmap versions of the icons. These are kept for backward compatibility or reference but are not used in the current version of the extension.
 
 ## Development Rules
