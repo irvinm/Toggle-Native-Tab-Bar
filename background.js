@@ -45,8 +45,14 @@ async function setPrefaceAndIconPerWindow(windowId, hidden) {
     } catch (e) {}
 }
 
-async function restoreWindowState(windowId) {
-    let hidden = hideTabBar; // Default to global state
+async function restoreWindowState(windowId, defaultHidden = null) {
+    const scope = await getToggleScope();
+    let hidden = defaultHidden;
+    
+    if (hidden === null) {
+        hidden = (scope === 'global') ? hideTabBar : false;
+    }
+
     try {
         const value = await browser.sessions.getWindowValue(windowId, 'hideTabBar');
         if (value !== undefined) {
@@ -176,7 +182,13 @@ async function toggleTabBar(targetWindowId) {
         }
         
         if (windowId) {
-            let currentState = windowStates.has(windowId) ? windowStates.get(windowId) : hideTabBar;
+            let currentState;
+            if (windowStates.has(windowId)) {
+                currentState = windowStates.get(windowId);
+            } else {
+                const scope = await getToggleScope();
+                currentState = (scope === 'global') ? hideTabBar : false;
+            }
             let newState = !currentState;
             await setPrefaceAndIconPerWindow(windowId, newState);
         }
@@ -193,7 +205,12 @@ browser.windows.onCreated.addListener(async (window) => {
             await browser.sessions.setWindowValue(window.id, 'hideTabBar', hideTabBar);
         } catch (e) {}
     } else {
-        await restoreWindowState(window.id);
+        const focusedWindow = await browser.windows.getLastFocused();
+        const defaultHidden =
+            focusedWindow && windowStates.has(focusedWindow.id)
+            ? windowStates.get(focusedWindow.id)
+            : false;
+        await restoreWindowState(window.id, defaultHidden);
     }
 });
 
