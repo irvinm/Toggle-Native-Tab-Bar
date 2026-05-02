@@ -1,5 +1,7 @@
 let hideTabBar = false;
 let windowStates = new Map(); // windowId -> boolean (true if hidden)
+let contextMenuInitialized = false;
+
 
 async function getToggleScope() {
     const storage = await browser.storage.local.get('toggleScope');
@@ -91,17 +93,25 @@ async function initialize() {
         }
     }
 
-    createContextMenu();
+    await createContextMenu();
+
 }
 
-function createContextMenu() {
-    browser.menus.removeAll().then(() => {
+async function createContextMenu() {
+    if (contextMenuInitialized) return;
+    contextMenuInitialized = true;
+
+    try {
+        await browser.menus.removeAll();
         browser.menus.create({
             id: "open-options",
             title: "Options",
             contexts: ["browser_action"]
         });
-    });
+    } catch (e) {
+        contextMenuInitialized = false;
+        console.error("Failed to create context menu:", e);
+    }
 }
 
 browser.runtime.onInstalled.addListener(async (details) => {
