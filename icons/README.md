@@ -22,7 +22,7 @@ Used strictly for the `README.md` and other markdown documentation.
 *   **Technical Note**: These are used in HTML `<picture>` tags within the README to provide static previews for users browsing the repository on GitHub.
 
 ### 4. AMO Assets
-*   **`icon-visible-dark.png`**: High-resolution black icon used for the extension's listing on AMO (Mozilla Add-ons), as AMO does not support SVG files for marketplace icons.
+*   **`icon-48.png`**, **`icon-128.png`**: High-resolution black icons explicitly sized for Firefox's Add-ons Manager (`about:addons`) and the AMO marketplace. Using exact sizes ensures Firefox parses them correctly and acts as a cache-buster.
 
 ### 5. Legacy Assets
 *   **`icon-visible.png`**, **`icon-hidden.png`**: Legacy bitmap versions of the icons. These are kept for backward compatibility or reference but are not used in the current version of the extension.

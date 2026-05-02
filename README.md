@@ -199,6 +199,13 @@ These steps will enable custom styling with the `userChrome.css` file.
 ## Version History
 
 <details open>
+<summary><b>Version 0.9.7.1 (April 26, 2026) — Icon Refresh</b></summary>
+
+- **Icon Refresh**: Use the AMO icon for both about:addons page and AMO.
+
+</details>
+
+<details>
 <summary><b>Version 0.9.6 (April 26, 2026) — Vertical Tabs Support & Dynamic Icon Coloring</b></summary>
 
 - **Vertical Tabs Support**: Updated CSS instructions to support Firefox 136+ native vertical tabs.
