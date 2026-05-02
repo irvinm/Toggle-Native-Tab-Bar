@@ -6,7 +6,8 @@
   "homepage_url": "https://github.com/irvinm/Toggle-Native-Tab-Bar",
   "permissions": [
     "storage",
-    "sessions"
+    "sessions",
+    "menus"
   ],
   "background": {
     "scripts": [

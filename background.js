@@ -84,6 +84,18 @@ async function initialize() {
             await restoreWindowState(window.id);
         }
     }
+
+    createContextMenu();
+}
+
+function createContextMenu() {
+    browser.menus.removeAll().then(() => {
+        browser.menus.create({
+            id: "open-options",
+            title: "Options",
+            contexts: ["browser_action"]
+        });
+    });
 }
 
 browser.runtime.onInstalled.addListener(async (details) => {
@@ -138,6 +150,13 @@ browser.commands.onCommand.addListener(async (command) => {
         if (win) {
             toggleTabBar(win.id);
         }
+    }
+});
+
+// Add a listener for the context menu
+browser.menus.onClicked.addListener((info) => {
+    if (info.menuItemId === "open-options") {
+        browser.runtime.openOptionsPage();
     }
 });
 
