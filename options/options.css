@@ -93,7 +93,7 @@ code {
     font-size: 90%;
     color: var(--code-text);
     background-color: var(--code-bg);
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 #firefox-version {
