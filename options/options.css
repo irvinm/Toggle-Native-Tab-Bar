@@ -139,6 +139,17 @@ li {
     text-decoration: underline;
 }
 
+/* General theme-aware link style */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
 /* Prism overrides/additions to match the theme better */
 pre[class*="language-"] {
     margin: 1em 0;
@@ -414,15 +425,6 @@ footer {
     text-align: center;
     color: var(--text-muted);
     font-size: 0.9em;
-}
-
-footer a {
-    color: var(--accent);
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
 }
 
 .important-action strong {

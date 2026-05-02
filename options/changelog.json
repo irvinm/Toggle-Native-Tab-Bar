@@ -4,7 +4,7 @@
     "date": "May 2, 2026",
     "title": "Per-Window Toggling & Session Persistence",
     "items": [
-      "<strong>Per-Window Toggling:</strong> You can now choose between 'Global' or 'Per-Window' toggling in the Settings section above. This allows you to hide or show tabs on individual windows independently. (<a href=\"https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3#issuecomment-4232037517\" target=\"_blank\" style=\"color: #0078d4;\">GitHub Discussion</a>)",
+      "<strong>Per-Window Toggling:</strong> You can now choose between 'Global' or 'Per-Window' toggling in the Settings section above. This allows you to hide or show tabs on individual windows independently. (<a href=\"https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3#issuecomment-4232037517\" target=\"_blank\">GitHub Discussion</a>)",
       "<strong>Dynamic Version History:</strong> The \"What's New\" section is now dynamic! If you skip multiple updates, you will see a combined list of everything you missed so you never fall behind on CSS or feature changes.",
       "<strong>Icon Visibility:</strong> Redesigned the main extension icon with a subtle white border to ensure high visibility on both dark and light themes within the Firefox Add-on Manager (<code>about:addons</code>).",
       "<strong>Quick Access:</strong> Added a right-click context menu to the toolbar icon, providing instant access to these options."
