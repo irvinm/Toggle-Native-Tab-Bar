@@ -18,6 +18,7 @@ Toggle Native Tab Bar gives you complete control over your browser's real estate
 *   **Session Persistence:** Your per-window toggle states are automatically saved and restored when you restart Firefox.
 *   **Quick Access:** Right-click the extension icon in the toolbar to quickly jump to the Options page.
 *   **Dynamic Theme Matching:** The toolbar icon automatically adapts its color to match your Firefox theme (Dark, Light, or Colorful).
+*   **Theme-Responsive Design:** The Options page and all setup documentation automatically switch between Light and Dark modes to match your browser's appearance.
 
 ## Functionality examples
 

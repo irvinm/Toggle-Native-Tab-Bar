@@ -62,18 +62,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (showAll || isNewToUser) {
                     displayedCount++;
                     const card = document.createElement('div');
-                    card.style.marginBottom = '20px';
-                    if (displayedCount > 1) {
-                        card.style.paddingTop = '20px';
-                        card.style.borderTop = '1px solid #444';
-                    }
+                    card.classList.add('changelog-card');
                     
-                    let itemsHtml = release.items.map(item => `<li style="padding-bottom: 0.5em;">${item}</li>`).join('');
+                    let itemsHtml = release.items.map(item => `<li>${item}</li>`).join('');
                     
                     card.innerHTML = `
-                        <h3 style="color: #fff; margin-bottom: 5px;">v${release.version} - ${release.title}</h3>
-                        <p style="color: #aaa; font-size: 0.85em; margin-bottom: 10px;">${release.date}</p>
-                        <ul style="padding-left: 1.2em;">
+                        <h3>v${release.version} - ${release.title}</h3>
+                        <p class="changelog-date">${release.date}</p>
+                        <ul>
                             ${itemsHtml}
                         </ul>
                     `;

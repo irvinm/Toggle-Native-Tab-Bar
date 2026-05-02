@@ -10,6 +10,7 @@ Toggle Native Tab Bar gives you complete control over your browser's real estate
 * **Native Tab Support:** Fully compatible with both standard horizontal and the latest native vertical tab features.
 * **Dynamic Icon Coloring:** The toolbar icon automatically matches your browser theme colors for a seamless, native look (requires a simple one-time manual setup).
 * **Quick Access:** Right-click the extension icon for instant access to setup instructions and settings.
+* **Theme-Responsive Design:** Options and setup pages automatically adapt to your browser's Light or Dark mode.
 * **Clean, Minimalist Design:** Modernized icons that visually represent the current state of your workspace.
 
 **Core Features:**
