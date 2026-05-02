@@ -10,7 +10,15 @@
 <!-- https://github.com/badges/shields -->
 
 ## Description
-Toggle Native Tab Bar gives you complete control over your browser's real estate. Whether you prefer the classic horizontal layout or the new native vertical tabs, this extension allows you to toggle that bar on and off instantly whenever you need it. It is the perfect companion for sidebar extensions like **Tree Style Tab** or **Sidebery**.
+Toggle Native Tab Bar gives you complete control over your browser's real estate.
+ Whether you prefer the classic horizontal layout or the new native vertical tabs, this extension allows you to toggle that bar on and off instantly whenever you need it. It is the perfect companion for sidebar extensions like **Tree Style Tab** or **Sidebery**.
+
+## Key Features
+*   **Flexible Scoping:** Choose whether toggling the tab bar affects all Firefox windows (Global) or only the active one (Per-Window).
+*   **Session Persistence:** Your per-window toggle states are automatically saved and restored when you restart Firefox.
+*   **Quick Access:** Right-click the extension icon in the toolbar to quickly jump to the Options page.
+*   **Dynamic Theme Matching:** The toolbar icon automatically adapts its color to match your Firefox theme (Dark, Light, or Colorful).
+*   **Theme-Responsive Design:** The Options page and all setup documentation automatically switch between Light and Dark modes to match your browser's appearance.
 
 ## Functionality examples
 
@@ -135,54 +143,70 @@ These steps will enable custom styling with the `userChrome.css` file.
 - The condition is based on the `titlepreface` property, which this add-on manipulates by adding or removing a space (" ").
 - You can refer to Mozilla’s documentation for more details: [MDN WebExtensions API - windows.update](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/windows/update)
 
-## (LIMITATION) Limited access to window control buttons
+## (INFO) Window Control Buttons (Min/Max/Close)
 
-*   When the native tabs are hidden, the minimize, maximize, and close buttons are not directly accessible. Here are some workarounds:
-    *   Use the current CSS solution to keep the Firefox native min/max/close buttons. (RECOMMENDED)
-    *   Use this add-on to temporarily show the native tab bar and regain access to the native window control buttons.
-    *   Use keyboard shortcuts:
-        *   `Alt+Space, N` for minimize
-        *   `Alt+Space, X` for maximize
-    *   Right-click the taskbar and use the context menu options.
-    *   Use `Windows Key + Arrow Keys` to move and resize the window.
-    *   Download and use Firefox add-ons that emulate the window control buttons and place them on the toolbar:
-        *   [Minimize the Window](https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/)
-        *   [Maximize the Window](https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/)
-        *   [Close the Window](https://addons.mozilla.org/en-US/firefox/addon/close-the-window/)
-        *   <img src="ui/MinMaxClose.png" alt="Min\Max\Close Emulation" width="30%" />
+Depending on which CSS solution you choose, the native window control buttons (minimize, maximize, and close) may be hidden along with the tab bar. This is easily managed:
 
+*   **Preserve Native Buttons (RECOMMENDED):** Use the **Current Solution** CSS provided above. It moves the native Firefox control buttons to the navigation bar so they remain fully accessible even when tabs are hidden.
+*   **Other Workarounds:** If you prefer a CSS solution that hides the entire titlebar area, you can still control the window using:
+    *   **Keyboard Shortcuts:** `Alt+Space, N` (Minimize) or `Alt+Space, X` (Maximize).
+    *   **Taskbar Menu:** Right-click the Firefox icon in your OS taskbar.
+    *   **System Controls:** Use `Windows Key + Arrow Keys` to snap or minimize.
+    *   **Emulation Add-ons:** Place standalone toolbar buttons for [Minimize](https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/), [Maximize](https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/), and [Close](https://addons.mozilla.org/en-US/firefox/addon/close-the-window/).
+        <div style="margin-top: 10px;">
+            <img src="ui/MinMaxClose.png" alt="Min/Max/Close Emulation" width="30%" />
+        </div>
 
+## (INFO) Add-on Icon & Theme Support
 
-## (INFO) Add-on icon & Dynamic Coloring
+### Toolbar Icon Meanings
+The extension icon in the toolbar changes dynamically to reflect whether the native tab bar is currently suppressed or active.
 
-*   **Modern Minimalist Design:** The add-on icon has been updated to a modern SVG design that visually represents both horizontal and vertical tab states.
-*   **Dynamic Icon Color:** The add-on now uses native SVG icons with `context-fill`. To allow the icon to automatically match your Firefox theme colors (staying visible on light, dark, or colorful themes), you must enable dynamic theme support:
-    1. Go to `about:config`.
-    2. Set `svg.context-properties.content.enabled` to **true**.
+<ul style="list-style-type: none; padding-left: 20px;">
+    <li style="margin-bottom: 15px;">
+        <div style="display: flex; align-items: center; margin-top: 5px;">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="icons/icon-visible-light.svg">
+                <img src="icons/icon-visible-dark.svg" alt="Visible Icon" width="48" style="margin-right: 10px;" />
+            </picture>
+            <span><strong>Tabs are Visible:</strong> Displays an outer frame with a tab strip line inside.</span>
+        </div>
+    </li>
+    <li>
+        <div style="display: flex; align-items: center;">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="icons/icon-hidden-light.svg">
+                <img src="icons/icon-hidden-dark.svg" alt="Hidden Icon" width="48" style="margin-right: 10px;" />
+            </picture>
+            <span><strong>Tabs are Hidden:</strong> Displays only the outer frame, indicating tabs are suppressed.</span>
+        </div>
+    </li>
+</ul>
+
+---
+
+### Add-ons Manager Appearance (`about:addons`)
+The main extension icon is specifically designed with a subtle border to ensure it remains perfectly visible and professional-looking across both light and dark browser themes.
+
+| Light Mode | Dark Mode |
+| :---: | :---: |
+| ![Light Mode](ui/about-addon-light.png) | ![Dark Mode](ui/about-addon-dark.png) |
+
+---
+
+### Dynamic Theme Coloring (Advanced)
+By default, the toolbar icon uses a fixed color. However, it supports **Dynamic Icon Coloring** using native SVG `context-fill`, allowing it to automatically match your theme's text color (Dark, Light, or Colorful).
+
+1. Go to `about:config`.
+2. Set `svg.context-properties.content.enabled` to **true**.
 
 > [!IMPORTANT]
-> **Action Required:** If you do not enable this setting, the add-on icon will remain black regardless of your theme and will not adapt to light or dark modes.
+> **Action Required:** If you do not enable this setting, the add-on icon will remain black/fixed and will not adapt to your theme's text color.
 
 <div style="margin-top: 15px; margin-bottom: 20px;">
     <img src="notes/iconcoloring-transparent.png" alt="Dynamic Icon Coloring Comparison" width="60%" />
     <p><i>The icon color automatically adapts to match your browser theme's text color.</i></p>
 </div>
-
-*   The toolbar icon changes to reflect the current state of the native tab bar:
-    * <div style="display: flex; align-items: center; margin-bottom: 10px; margin-top: 5px;">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="icons/icon-visible-light.svg">
-          <img src="icons/icon-visible-dark.svg" alt="Visible Icon" width="48" style="margin-right: 10px;" />
-        </picture>
-        <span>Indicates the native tab bar is currently <strong>visible</strong>. (Outer frame + tab line)</span>
-      </div>
-    * <div style="display: flex; align-items: center;">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="icons/icon-hidden-light.svg">
-          <img src="icons/icon-hidden-dark.svg" alt="Hidden Icon" width="48" style="margin-right: 10px;" />
-        </picture>
-        <span>Indicates the native tab bar is currently <strong>hidden</strong>. (Outer frame only)</span>
-      </div>
 
 ## Inspiration and credits
 
@@ -199,6 +223,17 @@ These steps will enable custom styling with the `userChrome.css` file.
 ## Version History
 
 <details open>
+<summary><b>Version 0.9.8 (May 2, 2026) — Per-Window Toggling & Session Persistence</b></summary>
+
+- **Per-Window Toggling**: Added support for toggling the tab bar on individual windows independently.
+- **Session Persistence**: Per-window toggle states are now saved and restored using the browser sessions API.
+- **Quick Access**: Added a right-click context menu to the toolbar icon for instant access to the Options page.
+- **Dynamic Version History**: The "What's New" section in Options is now dynamic, showing all updates since your last visit.
+- **Icon Visibility**: Updated the main extension icon with a subtle border for better visibility on all themes in the Add-on Manager.
+
+</details>
+
+<details>
 <summary><b>Version 0.9.7.1 (April 26, 2026) — Icon Refresh</b></summary>
 
 - **Icon Refresh**: Use the AMO icon for both about:addons page and AMO.

@@ -1,10 +1,14 @@
 {
   "manifest_version": 2,
   "name": "Toggle Native Tab Bar",
-  "version": "0.9.7.1",
+  "version": "0.9.8",
   "description": "Shows or hides the native tab bar",
   "homepage_url": "https://github.com/irvinm/Toggle-Native-Tab-Bar",
-  "permissions": ["storage"],
+  "permissions": [
+    "storage",
+    "sessions",
+    "menus"
+  ],
   "background": {
     "scripts": [
       "background.js"
@@ -18,7 +22,9 @@
     "gecko": {
       "id": "Toggle-Native-Tab_Bar@irvinm.addons.mozilla.org",
       "data_collection_permissions": {
-        "required": ["none"]
+        "required": [
+          "none"
+        ]
       }
     }
   },
@@ -33,7 +39,8 @@
   },
   "icons": {
     "48": "icons/icon-48.png",
-    "128": "icons/icon-128.png"
+    "128": "icons/icon-128.png",
+    "512": "icons/icon-512.png"
   },
   "commands": {
     "toggle-tab-bar": {

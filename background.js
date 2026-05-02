@@ -1,17 +1,67 @@
 let hideTabBar = false;
+let windowStates = new Map(); // windowId -> boolean (true if hidden)
+let contextMenuInitialized = false;
 
-async function setPrefaceAndIcon() {
-    // Set Preface for all open windows
+
+async function getToggleScope() {
+    const storage = await browser.storage.local.get('toggleScope');
+    return storage.toggleScope || 'global';
+}
+
+async function updateIcon(hidden, windowId = null) {
+    const iconPath = hidden ? 'icons/icon-hidden.svg' : 'icons/icon-visible.svg';
+    let details = { path: iconPath };
+    if (windowId !== null) {
+        details.windowId = windowId;
+    }
+    try {
+        await browser.browserAction.setIcon(details);
+    } catch (e) {
+        // Window might be closed or invalid, ignore
+    }
+}
+
+async function setPrefaceAndIconGlobal() {
     const windows = await browser.windows.getAll();
     const titlePreface = hideTabBar ? " " : "";
     
     for (const window of windows) {
+        windowStates.set(window.id, hideTabBar);
         await browser.windows.update(window.id, { titlePreface: titlePreface });
+        try {
+            await browser.sessions.setWindowValue(window.id, 'hideTabBar', hideTabBar);
+        } catch (e) {}
+        // Explicitly update each window's icon to clear any per-window overrides
+        await updateIcon(hideTabBar, window.id);
+    }
+    await updateIcon(hideTabBar); // Sets global icon for any future windows
+}
+
+async function setPrefaceAndIconPerWindow(windowId, hidden) {
+    const titlePreface = hidden ? " " : "";
+    windowStates.set(windowId, hidden);
+    await browser.windows.update(windowId, { titlePreface: titlePreface });
+    await updateIcon(hidden, windowId);
+    try {
+        await browser.sessions.setWindowValue(windowId, 'hideTabBar', hidden);
+    } catch (e) {}
+}
+
+async function restoreWindowState(windowId, defaultHidden = null) {
+    const scope = await getToggleScope();
+    let hidden = defaultHidden;
+    
+    if (hidden === null) {
+        hidden = (scope === 'global') ? hideTabBar : false;
     }
 
-    // Set the native SVG icon
-    const iconPath = hideTabBar ? 'icons/icon-hidden.svg' : 'icons/icon-visible.svg';
-    await browser.browserAction.setIcon({ path: iconPath });
+    try {
+        const value = await browser.sessions.getWindowValue(windowId, 'hideTabBar');
+        if (value !== undefined) {
+            hidden = value === true || value === 'true';
+        }
+    } catch (e) {}
+    await setPrefaceAndIconPerWindow(windowId, hidden);
 }
 
 async function initialize() {
@@ -32,7 +82,36 @@ async function initialize() {
         localStorage.removeItem('lastAcknowledgedVersion');
     }
 
-    await setPrefaceAndIcon();
+    const scope = await getToggleScope();
+    const windows = await browser.windows.getAll();
+    
+    if (scope === 'global') {
+        await setPrefaceAndIconGlobal();
+    } else {
+        for (const window of windows) {
+            await restoreWindowState(window.id);
+        }
+    }
+
+    await createContextMenu();
+
+}
+
+async function createContextMenu() {
+    if (contextMenuInitialized) return;
+    contextMenuInitialized = true;
+
+    try {
+        await browser.menus.removeAll();
+        browser.menus.create({
+            id: "open-options",
+            title: "Options",
+            contexts: ["browser_action"]
+        });
+    } catch (e) {
+        contextMenuInitialized = false;
+        console.error("Failed to create context menu:", e);
+    }
 }
 
 browser.runtime.onInstalled.addListener(async (details) => {
@@ -77,26 +156,92 @@ browser.runtime.onInstalled.addListener(async (details) => {
 
 // Add a listener for the browser action -- Triggered via the toolbar icon
 browser.browserAction.onClicked.addListener((tab) => {
-    toggleTabBar();
+    toggleTabBar(tab.windowId);
 });
 
 // Add a listener for the command -- Triggered via keyboard shortcut
-browser.commands.onCommand.addListener((command) => {
+browser.commands.onCommand.addListener(async (command) => {
     if (command === "toggle-tab-bar") {
-        toggleTabBar();
+        const win = await browser.windows.getLastFocused();
+        if (win) {
+            toggleTabBar(win.id);
+        }
+    }
+});
+
+// Add a listener for the context menu
+browser.menus.onClicked.addListener((info) => {
+    if (info.menuItemId === "open-options") {
+        browser.runtime.openOptionsPage();
     }
 });
 
 // Function to toggle the tab bar
-async function toggleTabBar() {
-    hideTabBar = !hideTabBar;
-    await browser.storage.local.set({ hideTabBar });
-    await setPrefaceAndIcon();
+async function toggleTabBar(targetWindowId) {
+    const scope = await getToggleScope();
+    
+    if (scope === 'global') {
+        hideTabBar = !hideTabBar;
+        await browser.storage.local.set({ hideTabBar });
+        await setPrefaceAndIconGlobal();
+    } else {
+        let windowId = targetWindowId;
+        if (!windowId) {
+            const win = await browser.windows.getLastFocused();
+            if (win) windowId = win.id;
+        }
+        
+        if (windowId) {
+            let currentState;
+            if (windowStates.has(windowId)) {
+                currentState = windowStates.get(windowId);
+            } else {
+                const scope = await getToggleScope();
+                currentState = (scope === 'global') ? hideTabBar : false;
+            }
+            let newState = !currentState;
+            await setPrefaceAndIconPerWindow(windowId, newState);
+        }
+    }
 }
 
 // Listen for when a new window is created
-browser.windows.onCreated.addListener((window) => {
-    setPrefaceAndIcon();
+browser.windows.onCreated.addListener(async (window) => {
+    const scope = await getToggleScope();
+    if (scope === 'global') {
+        windowStates.set(window.id, hideTabBar);
+        await browser.windows.update(window.id, { titlePreface: hideTabBar ? " " : "" });
+        try {
+            await browser.sessions.setWindowValue(window.id, 'hideTabBar', hideTabBar);
+        } catch (e) {}
+    } else {
+        const focusedWindow = await browser.windows.getLastFocused();
+        const defaultHidden =
+            focusedWindow && windowStates.has(focusedWindow.id)
+            ? windowStates.get(focusedWindow.id)
+            : false;
+        await restoreWindowState(window.id, defaultHidden);
+    }
+});
+
+// Listen for when a window is removed to clean up the Map
+browser.windows.onRemoved.addListener((windowId) => {
+    windowStates.delete(windowId);
+});
+
+// Listen for scope changes in options
+browser.storage.onChanged.addListener(async (changes, area) => {
+    if (area === 'local' && changes.toggleScope) {
+        if (changes.toggleScope.newValue === 'global') {
+            // Adopt the state of the currently focused window as the new global state
+            const win = await browser.windows.getLastFocused();
+            if (win && windowStates.has(win.id)) {
+                hideTabBar = windowStates.get(win.id);
+                await browser.storage.local.set({ hideTabBar });
+            }
+            setPrefaceAndIconGlobal();
+        }
+    }
 });
 
 // Start initialization

@@ -9,11 +9,15 @@ Toggle Native Tab Bar gives you complete control over your browser's real estate
 **Advanced Support & Customization:**
 * **Native Tab Support:** Fully compatible with both standard horizontal and the latest native vertical tab features.
 * **Dynamic Icon Coloring:** The toolbar icon automatically matches your browser theme colors for a seamless, native look (requires a simple one-time manual setup).
+* **Quick Access:** Right-click the extension icon for instant access to setup instructions and settings.
+* **Theme-Responsive Design:** Options and setup pages automatically adapt to your browser's Light or Dark mode.
 * **Clean, Minimalist Design:** Modernized icons that visually represent the current state of your workspace.
 
 **Core Features:**
 * **Instant Toggle:** Show or hide the native tab bar with a click or keyboard shortcut (Ctrl+Alt+T).
 * **Companion for Sidebars:** Designed to work perfectly alongside your favorite vertical tab managers.
+* **Per-Window Control:** Choose to toggle the tab bar globally across all windows or on a per-window basis.
+* **Session Persistence:** Your toggle states are automatically saved and restored when you restart Firefox.
 * **Flexible Configuration:** Choose whether to keep the native window control buttons (min/max/close) visible even when tabs are hidden.
 * **Performance Optimized:** Extremely lightweight with zero impact on browser speed.
 

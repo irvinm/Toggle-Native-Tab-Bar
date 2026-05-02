@@ -22,7 +22,7 @@
         <h1>Toggle Native Tab Bar Information</h1>
     </header>
 
-    <div class="header-info" style="padding: 0 20px;">
+    <div class="header-info">
         <p id="firefox-version">Loading Firefox version...</p>
     </div>
 
@@ -31,29 +31,36 @@
         <button id="dismiss-upgrade-btn">Dismiss</button>
     </div>
 
-    <main id="instructions-container" class="collapsible-content" style="padding: 0 20px;">
+    <!-- Settings Section -->
+    <section class="card settings-card">
+        <h2>Settings</h2>
+        <div class="settings-group">
+            <label for="toggle-scope">Toggle Scope:</label>
+            <select id="toggle-scope">
+                <option value="global">Global (All Windows)</option>
+                <option value="per-window">Per-Window (Current Window Only)</option>
+            </select>
+            <p class="settings-hint">
+                Choose whether toggling the tab bar affects all open Firefox windows or only the active one.
+            </p>
+        </div>
+    </section>
+
+    <main id="instructions-container" class="collapsible-content main-content">
         <!-- What's New Section -->
         <section id="update-notice" class="update-notice">
             <h2>What's New</h2>
-            <p>Here are the latest updates for this release:</p>
-            <ul>
-                <li style="padding-bottom: 1em;"><strong>Firefox 136+ Vertical Tabs Support:</strong> Added new CSS instructions below to handle both horizontal and vertical tab bars.</li>
-                <li style="padding-bottom: 1em;"><strong>New Simplified Icon:</strong> The add-on icon has been updated to a modern, minimalist SVG design that visually represents both horizontal and vertical tab states.</li>
-                <li style="padding-bottom: 1em;"><strong>Dynamic Icon Coloring:</strong> The add-on now uses native SVG icons with <code>context-fill</code>, allowing the icon color to automatically adapt to your Firefox theme.
-                    <ul style="margin-top: 5px;">
-                        <li class="important-action"><strong>Action Required:</strong> To prevent the icon from remaining black on all themes, follow the <a href="../notes/icon-coloring.html" target="_blank" style="color: #0078d4; font-weight: bold;">Icon Coloring Instructions</a> to enable dynamic theme support.</li>
-                    </ul>
-                </li>
-            </ul>
-            <p>For the history on the native buttons solution, please refer to this discussion: <a
-                    href="https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3#issuecomment-2556331029">https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3#issuecomment-2556331029</a>
-            </p>
-            <div style="margin-top: 20px;">
-                <img src="../ui/NativeButtons.png" alt="Dynamic Icon (Light)" class="theme-comparison-img" style="margin-right: 15px;">
-                <img src="../notes/iconcoloring-transparent.png" alt="Dynamic Icon (Dark/Transparent)" class="theme-comparison-img">
+            <div id="changelog-container">
+                <!-- Dynamically populated by options.js -->
+                <p>Loading updates...</p>
             </div>
+            
+            <button id="view-full-history-btn" class="button-link" style="margin-top: 15px;">View Full Version History</button>
+            <p style="margin-top: 10px; font-size: 0.9em; display: none;" id="github-history-link">
+                For complete details, visit the <a href="https://github.com/irvinm/Toggle-Native-Tab-Bar#version-history" target="_blank">Version History on GitHub</a>.
+            </p>
 
-            <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(209, 52, 56, 0.2);">
+            <div class="acknowledge-container">
                 <label style="cursor: pointer;">
                     <input type="checkbox" id="acknowledge-version-checkbox">
                     Don't show this update page on a new version unless there are some potential CSS changes.
@@ -64,12 +71,13 @@
         <!-- High Level Overview -->
         <section class="card">
             <h2>High Level Overview</h2>
-            <ul style="padding-left: 1.2em;">
-                <li style="padding-bottom: 0.8em;"><strong>Toggle Tabs:</strong> Show or hide the native Firefox tab bar with a single click.</li>
-                <li style="padding-bottom: 0.8em;"><strong>Companion for Sidebars:</strong> Perfect for users of Tree Style Tab, Sidebery, or other vertical tab extensions.</li>
-                <li style="padding-bottom: 0.8em;"><strong>Flexible Configuration:</strong> Use CSS to either hide the window controls along with tabs, or keep the native min/max/close buttons visible.</li>
-                <li style="padding-bottom: 0.8em;"><strong>Sidebar Clarification:</strong> This add-on toggles the <em>native</em> Firefox tab bars (horizontal or the new built-in vertical tabs). It does <strong>not</strong> control third-party sidebar extensions like Tree Style Tab or Sidebery; those are still managed by showing or hiding the Firefox sidebar.</li>
-                <li style="padding-bottom: 0.8em;"><strong>Dynamic Icon:</strong> The toolbar icon changes visually so you always know if the native tab bar is currently hidden or visible (if <a href="../notes/icon-coloring.html" target="_blank" style="color: #0078d4; font-weight: bold;">properly configured</a>).</li>
+            <ul>
+                <li><strong>Toggle Tabs:</strong> Show or hide the native Firefox tab bar with a single click.</li>
+                <li><strong>Companion for Sidebars:</strong> Perfect for users of Tree Style Tab, Sidebery, or other vertical tab extensions.</li>
+                <li><strong>Flexible Configuration:</strong> Use CSS to either hide the window controls along with tabs, or keep the native min/max/close buttons visible.</li>
+                <li><strong>Sidebar Clarification:</strong> This add-on toggles the <em>native</em> Firefox tab bars (horizontal or the new built-in vertical tabs). It does <strong>not</strong> control third-party sidebar extensions like Tree Style Tab or Sidebery; those are still managed by showing or hiding the Firefox sidebar.</li>
+                <li><strong>Dynamic Icon:</strong> The toolbar icon changes visually so you always know if the native tab bar is currently hidden or visible (if <a href="../notes/icon-coloring.html" target="_blank" class="accent-link">properly configured</a>).</li>
+                <li><strong>Quick Access:</strong> Right-click the extension icon in the toolbar to quickly access these options.</li>
             </ul>
         </section>
 
@@ -77,9 +85,9 @@
         <section class="card">
             <h2>Instructions on how to setup and use this add-on</h2>
             
-            <h3 style="margin-top: 20px; color: #fff;">1. Enabling userChrome.css</h3>
-            <p style="margin-bottom: 10px; color: #ccc; font-size: 0.95em;">(Skip this section if you already use userChrome.css)</p>
-            <ul style="padding-left: 1.2em;">
+            <h3>1. Enabling userChrome.css</h3>
+            <p class="settings-hint">(Skip this section if you already use userChrome.css)</p>
+            <ul>
                 <li>First, go to <code>about:config</code> and set
                     <code>toolkit.legacyUserProfileCustomizations.stylesheets = TRUE</code> to enable userChrome.css usage
                 </li>
@@ -91,7 +99,7 @@
                 <li>Inside the <code>chrome</code> folder, create a new file called <code>userChrome.css</code> if it doesn't exist</li>
             </ul>
 
-            <h3 style="margin-top: 30px; color: #fff;">2. Entering CSS into userChrome.css</h3>
+            <h3>2. Entering CSS into userChrome.css</h3>
             <div class="instruction-columns">
                 <!-- Column 1 -->
                 <div class="column">
@@ -162,7 +170,7 @@
                 </div>
             </div>
 
-            <div class="important-action" style="margin-top: 30px; border-left-color: #0078d4; background-color: rgba(0, 120, 212, 0.05);">
+            <div class="important-action info-action">
                 <p><strong>How it works:</strong> This add-on toggles between adding and removing a " " space character to the <code>titlepreface</code> property. Your CSS acts upon this change to show/hide the bars.</p>
                 <p style="margin-top: 10px;">Save your <code>userChrome.css</code> file and <strong>restart Firefox</strong> for changes to take effect.</p>
             </div>
@@ -173,15 +181,15 @@
             <h2>Additional Information</h2>
             
             <h3>Add-on Icon Meanings</h3>
-            <div style="display: flex; gap: 40px; flex-wrap: wrap; margin-top: 15px;">
-                <div style="flex: 1; min-width: 250px;">
-                    <p style="display: flex; align-items: center; gap: 15px;">
+            <div class="icon-meaning-group">
+                <div class="icon-meaning">
+                    <p>
                         <img src="../icons/icon-visible.png" alt="Visible Icon" class="icon-small">
                         <span><strong>Tabs are Visible:</strong> Represents support for both standard and vertical tab bars.</span>
                     </p>
                 </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <p style="display: flex; align-items: center; gap: 15px;">
+                <div class="icon-meaning">
+                    <p>
                         <img src="../icons/icon-hidden.png" alt="Hidden Icon" class="icon-small">
                         <span><strong>Tabs are Hidden:</strong> Only the outer frame is shown, indicating tabs are suppressed.</span>
                     </p>
@@ -189,12 +197,12 @@
             </div>
 
             <div class="important-action">
-                <strong>Action Required:</strong> To enable the dynamic theme matching shown in the graphics above, follow the <a href="../notes/icon-coloring.html" target="_blank" style="color: #0078d4; font-weight: bold;">Icon Coloring Instructions</a>.
+                <strong>Action Required:</strong> To enable the dynamic theme matching shown in the graphics above, follow the <a href="../notes/icon-coloring.html" target="_blank" style="font-weight: bold;">Icon Coloring Instructions</a>.
             </div>
 
-            <h3 style="margin-top: 30px;">Minimize/Maximize/Close Buttons</h3>
+            <h3>Minimize/Maximize/Close Buttons</h3>
             <p>If you use a solution that hides the native titlebar buttons, you can still control the window using:</p>
-            <ul style="padding-left: 1.2em; margin-top: 10px;">
+            <ul>
                 <li>The <strong>(RECOMMENDED)</strong> CSS solution above to move buttons to the navigation bar.</li>
                 <li>Keyboard shortcuts: <strong>Alt+Space</strong> then <strong>N</strong> (Minimize) or <strong>X</strong> (Maximize).</li>
                 <li>Right-click the taskbar icon.</li>
@@ -203,21 +211,21 @@
                     <a href="https://addons.mozilla.org/en-US/firefox/addon/minimize-the-window/">Minimize</a>, 
                     <a href="https://addons.mozilla.org/en-US/firefox/addon/maximize-the-window/">Maximize</a>, 
                     <a href="https://addons.mozilla.org/en-US/firefox/addon/close-the-window/">Close</a>.
-                    <div style="margin-top: 10px; padding-left: 20px;">
-                        <img src="../ui/MinMaxClose.png" alt="Min/Max/Close Emulation" style="width: 150px; border-radius: 4px;">
+                    <div class="emulation-preview">
+                        <img src="../ui/MinMaxClose.png" alt="Min/Max/Close Emulation">
                     </div>
                 </li>
             </ul>
 
-            <h3 style="margin-top: 30px;">Inspiration & Credits</h3>
-            <ul style="padding-left: 1.2em; margin-top: 10px;">
+            <h3>Inspiration & Credits</h3>
+            <ul>
                 <li>Inspired by <strong>Sidebery's</strong> dynamic native tabs feature.</li>
                 <li>Icon base by <a href="https://www.flaticon.com/authors/freepik" target="_blank">Freepik</a> via Flaticon.</li>
             </ul>
         </section>
     </main>
 
-    <div id="dismiss-container" class="dismiss-container hidden card" style="border-left: none; margin: 20px;">
+    <div id="dismiss-container" class="dismiss-container hidden section-margin">
         <p>Instructions are currently hidden. You've acknowledged the latest changes.</p>
         <button id="show-instructions-btn" class="button-link">Show Instructions</button>
     </div>

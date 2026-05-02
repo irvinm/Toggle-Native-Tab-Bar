@@ -1,19 +1,73 @@
+:root {
+    /* Light Mode (Default) */
+    --bg-main: #f9f9fb;
+    --bg-card: #ffffff;
+    --text-main: #15141a;
+    --text-muted: #5b5b66;
+    --accent: #0078d4;
+    --accent-hover: #005a9e;
+    --border: #e0e0e6;
+    --code-bg: #f0f0f4;
+    --code-text: #c60000;
+    --banner-bg: #0078d4;
+    --banner-text: #ffffff;
+    --update-bg: rgba(209, 52, 56, 0.05);
+    --update-border: #d13438;
+    --important-bg: rgba(255, 255, 0, 0.1);
+    --important-border: #e1e100;
+    --important-text: #15141a;
+    --important-strong: #8a8a00;
+    --shadow: rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark Mode */
+        --bg-main: #1c1b22;
+        --bg-card: #2b2a33;
+        --text-main: #fbfbfe;
+        --text-muted: #cfcfd8;
+        --accent: #00ddff;
+        --accent-hover: #80ebff;
+        --border: #38383d;
+        --code-bg: #42414d;
+        --code-text: #ffadad;
+        --banner-bg: #00ddff;
+        --banner-text: #1c1b22;
+        --update-bg: rgba(209, 52, 56, 0.1);
+        --update-border: #d13438;
+        --important-bg: rgba(255, 255, 0, 0.05);
+        --important-border: yellow;
+        --important-text: #fbfbfe;
+        --important-strong: yellow;
+        --shadow: rgba(0, 0, 0, 0.3);
+    }
+}
+
 body {
-    background-color: #333;
-    color: #fff;
-    font-family: Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
 }
 
 .options-header {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .header-icon {
     width: 48px;
     height: 48px;
+}
+
+/* Fix for icons in light mode: invert them if they are white/light */
+@media (prefers-color-scheme: light) {
+    .header-icon {
+        filter: invert(1) brightness(0.2);
+    }
 }
 
 .header-icon-group {
@@ -25,46 +79,75 @@ body {
 .header-arrow {
     width: 44px;
     height: 24px;
-    color: #0078d4;
+    color: var(--accent);
 }
 
-
-
 h3 {
-    text-decoration: underline;
+    text-decoration: none;
+    margin-top: 1.5em;
 }
 
 code {
     padding: 2px 4px;
     border-radius: 4px;
     font-size: 90%;
-    color: #8f0000;
-    background-color: #d7ced1;
+    color: var(--code-text);
+    background-color: var(--code-bg);
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 #firefox-version {
-    background-color: rgba(255, 255, 0, 0.2);
-    color: #fff;
+    background-color: var(--important-bg);
+    color: var(--text-main);
     padding: 8px 15px;
     border-radius: 4px;
     font-size: 0.9em;
     display: inline-block;
     margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 0, 0.3);
+    border: 1px solid var(--important-border);
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 1.8em;
     margin: 0;
 }
 
 h2 {
-    color: #0078d4;
-    font-size: 1.5em;
+    color: var(--accent);
+    font-size: 1.4em;
     margin-top: 0;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--border);
     padding-bottom: 10px;
     margin-bottom: 20px;
+}
+
+ul {
+    padding-left: 1.2em;
+}
+
+li {
+    padding-bottom: 0.8em;
+}
+
+.accent-link {
+    color: var(--accent);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.accent-link:hover {
+    text-decoration: underline;
+}
+
+/* General theme-aware link style */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: var(--accent-hover);
+    text-decoration: underline;
 }
 
 /* Prism overrides/additions to match the theme better */
@@ -73,9 +156,10 @@ pre[class*="language-"] {
     padding: 1.5em;
     font-size: 0.95em;
     line-height: 1.6;
-    border: 1px solid #444;
+    border: 1px solid var(--border);
     max-width: 100%;
     overflow-x: auto;
+    background: #272822 !important; /* Keep code blocks dark for readability */
 }
 
 code[class*="language-"] {
@@ -85,8 +169,7 @@ code[class*="language-"] {
 .collapsible-content {
     transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
     overflow: hidden;
-    max-height: 5000px;
-    /* Large enough to fit content */
+    max-height: 8000px; /* Large enough to fit content */
     opacity: 1;
 }
 
@@ -99,14 +182,15 @@ code[class*="language-"] {
 }
 
 .dismiss-container {
-    background-color: #444;
+    background-color: var(--bg-card);
     padding: 15px;
     border-radius: 8px;
     margin: 20px 0;
-    border-left: 5px solid #0078d4;
+    border-left: 5px solid var(--accent);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 8px var(--shadow);
 }
 
 .dismiss-container p {
@@ -114,8 +198,8 @@ code[class*="language-"] {
 }
 
 #show-instructions-btn, .button-link {
-    background-color: #0078d4;
-    color: white;
+    background-color: var(--accent);
+    color: var(--banner-text);
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
@@ -123,10 +207,11 @@ code[class*="language-"] {
     font-weight: bold;
     text-decoration: none;
     display: inline-block;
+    transition: background-color 0.2s;
 }
 
 #show-instructions-btn:hover, .button-link:hover {
-    background-color: #005a9e;
+    background-color: var(--accent-hover);
 }
 
 .hidden {
@@ -134,8 +219,8 @@ code[class*="language-"] {
 }
 
 .upgrade-banner {
-    background-color: #0078d4;
-    color: white;
+    background-color: var(--banner-bg);
+    color: var(--banner-text);
     padding: 10px 20px;
     margin: 0px 0px 20px 0px;
     font-weight: bold;
@@ -146,13 +231,90 @@ code[class*="language-"] {
 }
 
 #dismiss-upgrade-btn {
-    background: white;
-    color: #0078d4;
-    border: none;
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
     padding: 5px 10px;
     border-radius: 3px;
     cursor: pointer;
     font-size: 0.9em;
+}
+
+.settings-card {
+    margin: 20px !important;
+}
+
+.settings-group {
+    margin-top: 15px;
+}
+
+.settings-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.settings-group select {
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    font-size: 1em;
+}
+
+.settings-hint {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.acknowledge-container {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+}
+
+.main-content {
+    padding: 0 20px;
+}
+
+.info-action {
+    margin-top: 30px !important;
+}
+
+.icon-meaning-group {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.icon-meaning {
+    flex: 1;
+    min-width: 250px;
+}
+
+.icon-meaning p {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.emulation-preview {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.emulation-preview img {
+    width: 150px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.section-margin {
+    margin: 20px !important;
 }
 
 .instruction-columns {
@@ -162,57 +324,72 @@ code[class*="language-"] {
     margin-top: 20px;
     align-items: flex-start;
     max-width: 1600px;
-    /* Limit overall width to prevent excessive stretching */
 }
 
 .column {
     flex: 1 1 450px;
-    /* Grow/shrink, with 450px as the target width before wrapping */
     min-width: 0;
-    /* Allow columns to shrink below 450px on very small screens if needed */
 }
-
-/* Ensure code blocks don't force columns to be too wide */
-
 
 .column h3 {
     margin-top: 0;
     font-size: 1.3em;
-    color: #fff;
-    text-decoration: none;
-    border-bottom: 1px solid #555;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
 
 .card {
-    background-color: #2a2a2a;
-    border: 1px solid #444;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
     border-radius: 8px;
     padding: 25px;
     margin-bottom: 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px var(--shadow);
 }
 
 .update-notice {
-    border: 2px solid #d13438;
-    background-color: rgba(209, 52, 56, 0.1);
+    border: 2px solid var(--update-border);
+    background-color: var(--update-bg);
     padding: 25px;
     border-radius: 8px;
     margin-bottom: 30px;
 }
 
 .update-notice h2 {
-    color: #d13438;
-    border-bottom-color: rgba(209, 52, 56, 0.3);
+    color: var(--update-border);
+    border-bottom-color: var(--update-border);
+    opacity: 0.8;
+}
+
+.changelog-card {
+    margin-bottom: 20px;
+}
+
+.changelog-card + .changelog-card {
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.changelog-card h3 {
+    color: var(--text-main);
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+
+.changelog-date {
+    color: var(--text-muted);
+    font-size: 0.85em;
+    margin-bottom: 10px;
 }
 
 .important-action {
     margin-top: 15px;
     padding: 12px 16px;
-    background-color: rgba(255, 255, 0, 0.05);
-    border-left: 4px solid yellow;
-    color: #fff;
+    background-color: var(--important-bg);
+    border-left: 4px solid var(--important-border);
+    color: var(--important-text);
     list-style-type: none;
     font-size: 0.95em;
     line-height: 1.5;
@@ -236,7 +413,7 @@ code[class*="language-"] {
     width: 40%;
     height: auto;
     vertical-align: top;
-    border: 2px solid black;
+    border: 1px solid var(--border);
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -244,24 +421,14 @@ code[class*="language-"] {
 footer {
     margin-top: 50px;
     padding: 20px;
-    border-top: 1px solid #444;
+    border-top: 1px solid var(--border);
     text-align: center;
-    color: #888;
+    color: var(--text-muted);
     font-size: 0.9em;
 }
 
-footer a {
-    color: #0078d4;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-
 .important-action strong {
-    color: yellow;
+    color: var(--important-strong);
     text-transform: uppercase;
     margin-right: 5px;
-}
+}

@@ -1,0 +1,81 @@
+[
+  {
+    "version": "0.9.8",
+    "date": "May 2, 2026",
+    "title": "Per-Window Toggling & Session Persistence",
+    "items": [
+      "<strong>Per-Window Toggling:</strong> You can now choose between 'Global' or 'Per-Window' toggling in the Settings section above. This allows you to hide or show tabs on individual windows independently. (<a href=\"https://github.com/irvinm/Toggle-Native-Tab-Bar/issues/3#issuecomment-4232037517\" target=\"_blank\">GitHub Discussion</a>)",
+      "<strong>Dynamic Version History:</strong> The \"What's New\" section is now dynamic! If you skip multiple updates, you will see a combined list of everything you missed so you never fall behind on CSS or feature changes.",
+      "<strong>Icon Visibility:</strong> Redesigned the main extension icon with a subtle white border to ensure high visibility on both dark and light themes within the Firefox Add-on Manager (<code>about:addons</code>).",
+      "<strong>Quick Access:</strong> Added a right-click context menu to the toolbar icon, providing instant access to these options."
+    ]
+  },
+  {
+    "version": "0.9.7.1",
+    "date": "April 26, 2026",
+    "title": "Icon Refresh",
+    "items": [
+      "Updated icons across the add-on and AMO listings."
+    ]
+  },
+  {
+    "version": "0.9.6",
+    "date": "April 26, 2026",
+    "title": "Vertical Tabs Support & Dynamic Icon Coloring",
+    "items": [
+      "<strong>Firefox 136+ Vertical Tabs Support:</strong> Added new CSS instructions below to handle both horizontal and vertical tab bars.",
+      "<strong>New Simplified Icon:</strong> The add-on icon has been updated to a modern, minimalist SVG design that visually represents both horizontal and vertical tab states.",
+      "<strong>Dynamic Icon Coloring:</strong> The add-on now uses native SVG icons with <code>context-fill</code>, allowing the icon color to automatically adapt to your Firefox theme."
+    ]
+  },
+  {
+    "version": "0.9.5",
+    "date": "January 12, 2025",
+    "title": "Native Button Support Documentation",
+    "items": [
+      "Documented a new CSS solution that allows using native min/max/close buttons instead of emulated ones."
+    ]
+  },
+  {
+    "version": "0.9.4",
+    "date": "December 14, 2024",
+    "title": "Keyboard Shortcut Support",
+    "items": [
+      "Added keyboard support with <code>Ctrl+Alt+T</code> as the default shortcut to toggle the tab bar."
+    ]
+  },
+  {
+    "version": "0.9.3",
+    "date": "November 3, 2024",
+    "title": "Improved Instructions & Formatting",
+    "items": [
+      "Added Firefox 133 userChrome.css change instructions.",
+      "Added a dismissible instructions banner.",
+      "Integrated OS-specific guides."
+    ]
+  },
+  {
+    "version": "0.9.2",
+    "date": "June 24, 2024",
+    "title": "Bug Fixes",
+    "items": [
+      "Fixed window management behaviors for newly created windows."
+    ]
+  },
+  {
+    "version": "0.9.1",
+    "date": "March 11, 2024",
+    "title": "Technical Update",
+    "items": [
+      "Updated internal title delimiter for better compatibility."
+    ]
+  },
+  {
+    "version": "0.9.0",
+    "date": "March 11, 2024",
+    "title": "Initial Release",
+    "items": [
+      "Toggles the native Firefox tab bar via title preface manipulation."
+    ]
+  }
+]

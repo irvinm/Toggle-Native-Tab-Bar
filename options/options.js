@@ -10,15 +10,106 @@ document.addEventListener('DOMContentLoaded', async () => {
     const checkbox = document.getElementById('acknowledge-version-checkbox');
 
     const currentVersion = browser.runtime.getManifest().version;
+    const toggleScopeSelect = document.getElementById('toggle-scope');
+    
+    // Changelog elements
+    const changelogContainer = document.getElementById('changelog-container');
+    const viewHistoryBtn = document.getElementById('view-full-history-btn');
+    const githubHistoryLink = document.getElementById('github-history-link');
+
+    // Helper to compare semantic versions
+    function compareVersions(v1, v2) {
+        if (!v1) return -1;
+        if (!v2) return 1;
+        const parts1 = v1.split('.').map(Number);
+        const parts2 = v2.split('.').map(Number);
+        const len = Math.max(parts1.length, parts2.length);
+        for (let i = 0; i < len; i++) {
+            const p1 = parts1[i] || 0;
+            const p2 = parts2[i] || 0;
+            if (p1 > p2) return 1;
+            if (p1 < p2) return -1;
+        }
+        return 0;
+    }
+
+    let currentRenderController = null;
+
+    async function renderChangelog(lastAck, showAll = false) {
+        if (!changelogContainer) return;
+        
+        if (currentRenderController) {
+            currentRenderController.abort();
+        }
+        currentRenderController = new AbortController();
+        const signal = currentRenderController.signal;
+
+        try {
+            const response = await fetch('changelog.json', { signal });
+            const changelog = await response.json();
+            
+            if (signal.aborted) return;
+            changelogContainer.innerHTML = ''; 
+            let displayedCount = 0;
+            
+            for (const release of changelog) {
+                let isNewToUser = false;
+                if (!lastAck) {
+                    // If no acknowledged version, only show the current one to avoid spam
+                    isNewToUser = (release.version === currentVersion); 
+                } else {
+                    // Show if the release version is strictly greater than the last acknowledged version
+                    isNewToUser = compareVersions(release.version, lastAck) > 0;
+                }
+                
+                // If they are opening the options page manually and have seen everything,
+                // we should at least show the current version as a default.
+                if (lastAck === currentVersion && release.version === currentVersion && !showAll) {
+                    isNewToUser = true;
+                }
+                
+                if (showAll || isNewToUser) {
+                    displayedCount++;
+                    const card = document.createElement('div');
+                    card.classList.add('changelog-card');
+                    
+                    let itemsHtml = release.items.map(item => `<li>${item}</li>`).join('');
+                    
+                    card.innerHTML = `
+                        <h3>v${release.version} - ${release.title}</h3>
+                        <p class="changelog-date">${release.date}</p>
+                        <ul>
+                            ${itemsHtml}
+                        </ul>
+                    `;
+                    changelogContainer.appendChild(card);
+                }
+            }
+            
+            if (displayedCount === 0 && !showAll && !signal.aborted) {
+                changelogContainer.innerHTML = '<p>No new updates to show.</p>';
+            }
+        } catch (e) {
+            if (e.name === 'AbortError') return;
+            changelogContainer.innerHTML = '<p>Error loading updates.</p>';
+        }
+    }
     
     // Use asynchronous browser.storage.local instead of localStorage
-    const storage = await browser.storage.local.get(['lastAcknowledgedVersion', 'showUpdatePage']);
+    const storage = await browser.storage.local.get(['lastAcknowledgedVersion', 'showUpdatePage', 'toggleScope']);
     const lastAcknowledged = storage.lastAcknowledgedVersion;
     const showUpdatePage = storage.showUpdatePage !== undefined ? storage.showUpdatePage : true;
 
     if (addonVersionSpan) {
         addonVersionSpan.textContent = `v${currentVersion}`;
     }
+
+    if (toggleScopeSelect) {
+        toggleScopeSelect.value = storage.toggleScope || 'global';
+    }
+
+    // Render the changelog on load
+    renderChangelog(lastAcknowledged);
 
     let isManuallyExpanded = false;
 
@@ -98,6 +189,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await browser.storage.local.remove('lastAcknowledgedVersion');
                 await updateBannerVisibility();
             }
+        });
+    }
+
+    if (toggleScopeSelect) {
+        toggleScopeSelect.addEventListener('change', async () => {
+            await browser.storage.local.set({ toggleScope: toggleScopeSelect.value });
+        });
+    }
+
+    if (viewHistoryBtn) {
+        viewHistoryBtn.addEventListener('click', () => {
+            renderChangelog(lastAcknowledged, true);
+            viewHistoryBtn.style.display = 'none';
+            if (githubHistoryLink) githubHistoryLink.style.display = 'block';
         });
     }
 
