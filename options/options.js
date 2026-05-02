@@ -10,14 +10,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     const checkbox = document.getElementById('acknowledge-version-checkbox');
 
     const currentVersion = browser.runtime.getManifest().version;
+    const toggleScopeSelect = document.getElementById('toggle-scope');
     
     // Use asynchronous browser.storage.local instead of localStorage
-    const storage = await browser.storage.local.get(['lastAcknowledgedVersion', 'showUpdatePage']);
+    const storage = await browser.storage.local.get(['lastAcknowledgedVersion', 'showUpdatePage', 'toggleScope']);
     const lastAcknowledged = storage.lastAcknowledgedVersion;
     const showUpdatePage = storage.showUpdatePage !== undefined ? storage.showUpdatePage : true;
 
     if (addonVersionSpan) {
         addonVersionSpan.textContent = `v${currentVersion}`;
+    }
+
+    if (toggleScopeSelect) {
+        toggleScopeSelect.value = storage.toggleScope || 'global';
     }
 
     let isManuallyExpanded = false;
@@ -98,6 +103,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await browser.storage.local.remove('lastAcknowledgedVersion');
                 await updateBannerVisibility();
             }
+        });
+    }
+
+    if (toggleScopeSelect) {
+        toggleScopeSelect.addEventListener('change', async () => {
+            await browser.storage.local.set({ toggleScope: toggleScopeSelect.value });
         });
     }
 

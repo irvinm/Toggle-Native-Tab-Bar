@@ -31,6 +31,21 @@
         <button id="dismiss-upgrade-btn">Dismiss</button>
     </div>
 
+    <!-- Settings Section -->
+    <section class="card" style="margin: 20px;">
+        <h2>Settings</h2>
+        <div style="margin-top: 15px;">
+            <label for="toggle-scope" style="font-weight: bold; display: block; margin-bottom: 5px;">Toggle Scope:</label>
+            <select id="toggle-scope" style="padding: 5px; border-radius: 4px; background-color: #333; color: white; border: 1px solid #555;">
+                <option value="global">Global (All Windows)</option>
+                <option value="per-window">Per-Window (Current Window Only)</option>
+            </select>
+            <p style="margin-top: 10px; color: #ccc; font-size: 0.9em;">
+                Choose whether toggling the tab bar affects all open Firefox windows or only the active one.
+            </p>
+        </div>
+    </section>
+
     <main id="instructions-container" class="collapsible-content" style="padding: 0 20px;">
         <!-- What's New Section -->
         <section id="update-notice" class="update-notice">
